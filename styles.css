@@ -2145,3 +2145,31 @@ body {
     color: transparent !important;
     -webkit-text-stroke: 1px #ffffff !important;
 }
+
+/* ==================== STATUS BADGES ==================== */
+.status-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: white;
+    z-index: 20; /* Di atas mc-title-front yang bernilai 10 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+}
+.status-unavailable {
+    background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+}
+.status-coming-soon {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+.is-unavailable .mc-img {
+    filter: grayscale(100%) opacity(0.7);
+}
+.is-unavailable .mc-price {
+    opacity: 0.5;
+    text-decoration: line-through;
+}

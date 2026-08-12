@@ -161,6 +161,7 @@
             return `
             <div class="menu-card-modern${isLastOdd ? ' menu-card-last-odd' : ''}" id="menu-${cat}">
                 <div class="mc-visual">
+                    <div id="${cat}StatusBadgeContainer"></div>
                     <h3 class="mc-title mc-title-back" id="${cat}TitleDisplayBack">${defaultTitle}</h3>
                     <div class="mc-nav-left" onclick="switchProduct('${cat}', -1)" aria-label="Varian sebelumnya">◀</div>
                     <img src="${defaultImg}" alt="${defaultTitle}" class="mc-img" id="${cat}ImgDisplay">
@@ -237,27 +238,51 @@
 
         // Optional Groups (maks 2)
         const optionalGroups = product.optionalGroups || [];
-        renderOptionalGroup(category, 0, optionalGroups[0]);
-        if (optionalGroups.length > 1) renderOptionalGroup(category, 1, optionalGroups[1]);
+        const flavor = currentSubmenu.flavor_type || 'asin';
+        renderOptionalGroup(category, 0, optionalGroups[0], flavor);
+        if (optionalGroups.length > 1) renderOptionalGroup(category, 1, optionalGroups[1], flavor);
 
-        // Qty default berdasarkan sales_rules
+        // Qty default berdasarkan sales_rules (dukung override per varian)
         const qtyEl = document.getElementById(`${category}Qty`);
         if (qtyEl) {
-            let minOrder = 1;
-            if (product.sales_rules) {
-                const rules = typeof product.sales_rules === 'string'
-                    ? JSON.parse(product.sales_rules) : product.sales_rules;
-                minOrder = parseInt(rules.minOrder, 10) || 1;
-            }
+            const rules = getProductRules(category);
+            const minOrder = rules.minOrder;
             const currentVal = parseInt(qtyEl.textContent, 10) || 0;
             if (currentVal < minOrder) qtyEl.textContent = minOrder;
         }
+
+        // Update Status Badge and Add to Cart button
+        const status = currentSubmenu.status || 'available';
+        const badgeContainer = document.getElementById(`${category}StatusBadgeContainer`);
+        const addBtn = document.getElementById(`${category}AddBtn`);
+        const menuCard = document.getElementById(`menu-${category}`);
+        
+        if (status === 'unavailable') {
+            if (badgeContainer) badgeContainer.innerHTML = `<div class="status-badge status-unavailable">HABIS</div>`;
+            if (addBtn) { addBtn.textContent = 'Sedang Habis'; addBtn.classList.add('disabled'); addBtn.classList.remove('active'); addBtn.disabled = true; }
+            if (menuCard) menuCard.classList.add('is-unavailable');
+        } else if (status === 'coming_soon') {
+            if (badgeContainer) badgeContainer.innerHTML = `<div class="status-badge status-coming-soon">COMING SOON</div>`;
+            if (addBtn) { addBtn.textContent = 'Segera Hadir'; addBtn.classList.add('disabled'); addBtn.classList.remove('active'); addBtn.disabled = true; }
+            if (menuCard) menuCard.classList.add('is-unavailable');
+        } else {
+            if (badgeContainer) badgeContainer.innerHTML = '';
+            if (addBtn) { addBtn.textContent = 'Tambahkan ke Keranjang'; addBtn.classList.remove('disabled'); addBtn.classList.add('active'); addBtn.disabled = false; }
+            if (menuCard) menuCard.classList.remove('is-unavailable');
+        }
     }
 
-    function renderOptionalGroup(category, groupIndex, group) {
+    function renderOptionalGroup(category, groupIndex, group, flavor = 'asin') {
         const containerId = `${category}Optional${groupIndex + 1}`;
         const $container = document.getElementById(containerId);
         if (!$container) return;
+
+        // Logika cerdas: Jika flavor manis dan grup bernama "Pilihan Isi", sembunyikan!
+        const groupLabelLower = (group?.label || group?.id || '').toLowerCase();
+        if (flavor === 'manis' && (groupLabelLower.includes('isi') || groupLabelLower.includes('telur'))) {
+            $container.innerHTML = '';
+            return;
+        }
 
         if (!group || !group.options || group.options.length === 0) {
             $container.innerHTML = '';
@@ -345,7 +370,20 @@
     function getProductRules(productId) {
         const product = Array.isArray(config.products)
             ? config.products.find(p => p.id === productId) : null;
-        if (!product || !product.sales_rules) return { minOrder: 1, defaultStep: 1 };
+        if (!product) return { minOrder: 1, defaultStep: 1 };
+
+        // Cek override dari varian (submenu) aktif
+        const submenus = product.submenus || [];
+        const idx = currentProductIndex[productId] || 0;
+        const currentSubmenu = submenus[idx];
+        
+        if (currentSubmenu && currentSubmenu.minOrder !== undefined && currentSubmenu.minOrder !== null) {
+            const min = parseInt(currentSubmenu.minOrder, 10) || 1;
+            return { minOrder: min, defaultStep: min };
+        }
+
+        // Jika tidak ada override varian, gunakan aturan produk utama
+        if (!product.sales_rules) return { minOrder: 1, defaultStep: 1 };
         const r = typeof product.sales_rules === 'string'
             ? JSON.parse(product.sales_rules) : product.sales_rules;
         return {
