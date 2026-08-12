@@ -763,6 +763,11 @@ body {
     color: rgba(61, 44, 46, 0.96);
 }
 
+#puddingPriceDisplay {
+    color: #ffffff;
+    text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+}
+
 .mc-nav-left,
 .mc-nav-right {
     position: absolute;
