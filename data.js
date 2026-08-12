@@ -170,7 +170,7 @@ window.CONFIG = {
                 {
                     "id": "sosis",
                     "product_id": "risoles",
-                    "name": "Risoles Sosis",
+                    "name": "Risoles Mayo",
                     "description": "{\"imageScale\":190,\"imageOffsetX\":0,\"imageOffsetY\":50}",
                     "image": "assets/images/sosis mayo-nobg.webp",
                     "price": "5000",
@@ -224,7 +224,7 @@ window.CONFIG = {
                     "name": "Choco Cheese",
                     "description": "{\"imageScale\":200,\"imageOffsetX\":0,\"imageOffsetY\":45,\"minOrder\":5}",
                     "image": "assets/images/risoles-choco-cheese.webp",
-                    "price": "3000",
+                    "price": "5000",
                     "note": "Nikmat Rasakan Gurih dan Coklat",
                     "flavor_type": "manis",
                     "status": "available",
