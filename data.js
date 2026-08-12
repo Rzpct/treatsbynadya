@@ -233,7 +233,7 @@ window.CONFIG = {
                     "updated_at": "2026-08-12 22:34:13",
                     "imageScale": 200,
                     "imageOffsetX": 0,
-                    "imageOffsetY": 45,
+                    "imageOffsetY": 75,
                     "minOrder": 5
                 }
             ],
