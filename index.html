@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dapur Rumahan - Risoles &amp; Pudding Homemade</title>
+    <link rel="stylesheet" href="assets/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="#hero" class="nav-logo">
+                <img src="assets/images/about.jpg" alt="Logo" class="logo-icon-img"> Dapur Rumahan
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="active">Beranda</a></li>
+                <li><a href="#about">Profil</a></li>
+                <li><a href="#best-seller">Best Seller</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#testimoni">Testimoni</a></li>
+                <li>
+                    <button class="nav-cart-btn btn" onclick="openCart()" aria-label="Buka keranjang">
+                        🛒 Keranjang <span class="cart-badge" id="cartBadge">0</span>
+                    </button>
+                </li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <span class="hero-badge">🏠 Homemade Since 2021</span>
+            <h1>Risoles Renyah &amp; <span class="highlight">Pudding Lembut</span> Rumahan</h1>
+            <p>Dibuat dengan bahan berkualitas, resep turun-temurun, dan cinta di setiap gigitan. Tersedia dalam opsi
+                goreng hangat atau frozen siap simpan.</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary">📋 Lihat Menu</a>
+                <a href="#about" class="btn btn-outline">👩‍🍳 Tentang Kami</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <span class="food-emoji">🥟</span>
+            <span class="food-emoji">🍮</span>
+            <span class="food-emoji">🥐</span>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT / PROFILE ==================== -->
+    <section class="section about-section" id="about">
+        <div class="about-grid">
+            <div class="about-image" id="aboutImageContainer">
+                <img id="aboutImage" src="assets/images/about.jpg" alt="Tentang Kami"
+                    style="width:100%;height:100%;object-fit:cover;border-radius:20px;">
+            </div>
+            <div class="about-text">
+                <span class="section-label">Profil Kami</span>
+                <h2>Cerita dari Dapur Kecil Penuh Cinta</h2>
+                <p>
+                    <strong>Dapur Rumahan</strong> berawal dari hobi membuat camilan untuk keluarga. Resep risoles
+                    warisan nenek dan pudding lembut favorit anak-anak kini hadir untuk Anda.
+                </p>
+                <p>
+                    Setiap produk kami buat <strong>fresh setiap hari</strong> menggunakan bahan-bahan pilihan. Kami
+                    percaya bahwa makanan rumahan terbaik lahir dari kesederhanaan, kebersihan, dan ketulusan.
+                </p>
+                <div class="about-highlights">
+                    <div class="about-highlight">
+                        <span class="icon-circle">✅</span> Bahan Segar
+                    </div>
+                    <div class="about-highlight">
+                        <span class="icon-circle">🧼</span> Higienis
+                    </div>
+                    <div class="about-highlight">
+                        <span class="icon-circle">❤️</span> Made with Love
+                    </div>
+                    <div class="about-highlight">
+                        <span class="icon-circle">🚀</span> Pengiriman Cepat
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BEST SELLER ==================== -->
+    <section class="section best-seller-section" id="best-seller">
+        <div class="section-header">
+            <span class="section-label">🌟 Best Seller</span>
+            <h2 class="section-title">Paling Banyak Dipesan</h2>
+            <p class="section-subtitle">Inilah produk-produk andalan yang selalu jadi favorit pelanggan setia kami.</p>
+        </div>
+        <div class="best-seller-grid" id="bestSellerGrid">
+            <!-- Best seller cards rendered by app.js from CONFIG.bestSellers -->
+        </div>
+    </section>
+
+    <!-- ==================== MENU SECTION ==================== -->
+    <section class="section menu-section" id="menu">
+        <div class="section-header">
+            <span class="section-label">📋 Menu Kami</span>
+            <h2 class="section-title">Pilih &amp; Pesan Sekarang</h2>
+            <p class="section-subtitle">Semua menu tersedia fresh, langsung dari dapur kami ke tangan Anda.</p>
+        </div>
+        <div class="menu-grid" id="menuGrid">
+            <!-- Dirender secara dinamis oleh app.js -->
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONI ==================== -->
+    <section class="section testimoni-section" id="testimoni">
+        <div class="section-header">
+            <span class="section-label">💬 Testimoni</span>
+            <h2 class="section-title">Kata Pelanggan Kami</h2>
+            <p class="section-subtitle">Ratusan pelanggan puas telah mencicipi produk Dapur Rumahan.</p>
+        </div>
+        <div class="testimoni-grid">
+            <div class="testimoni-card">
+                <div class="quote-icon">❝</div>
+                <p>"Risolesnya enak banget! Kulitnya renyah, isiannya creamy. Saya selalu stok yang frozen di rumah biar
+                    bisa goreng kapan aja. Recommended!"</p>
+                <div class="t-stars">⭐⭐⭐⭐⭐</div>
+                <div class="t-author">Anisa Putri</div>
+                <div class="t-role">Pelanggan Setia • Jakarta</div>
+            </div>
+            <div class="testimoni-card">
+                <div class="quote-icon">❝</div>
+                <p>"Pudding Silverqueen-nya juara! Lembut banget dan cokelatnya kerasa premium. Cocok buat hampers atau
+                    dessert acara keluarga."</p>
+                <div class="t-stars">⭐⭐⭐⭐⭐</div>
+                <div class="t-author">Budi Santoso</div>
+                <div class="t-role">Food Blogger • Bandung</div>
+            </div>
+            <div class="testimoni-card">
+                <div class="quote-icon">❝</div>
+                <p>"Langganan udah 2 tahun. Bersih, enak, dan pelayanannya ramah. Pudding Regal favorit anak-anak saya.
+                    Pasti repeat order!"</p>
+                <div class="t-stars">⭐⭐⭐⭐⭐</div>
+                <div class="t-author">Sari Wulandari</div>
+                <div class="t-role">Ibu Rumah Tangga • Surabaya</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <p>&copy; 2026 <strong>Dapur Rumahan</strong> — Risoles &amp; Pudding Homemade. Made with ❤️ dari dapur kecil kami
+            untuk Anda.</p>
+    </footer>
+
+    <!-- ==================== CART OVERLAY & PANEL ==================== -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-panel" id="cartPanel">
+        <!-- Collapsed compact bar visible when panel is collapsed -->
+        <div class="cart-collapsed" id="cartCollapsed" onclick="openCart()" role="button" aria-label="Buka keranjang">
+            <div class="cc-left">
+                <div class="cc-count" id="ccCount">0</div>
+                <div class="cc-info">
+                    <div class="cc-items" id="ccItems">Keranjang kosong</div>
+                    <div class="cc-total" id="ccTotal">Rp 0</div>
+                </div>
+            </div>
+            <div class="cc-action">
+                <button id="ccQuickOrder" class="cc-quick-btn" onclick="orderViaWhatsApp()"
+                    aria-label="Pesan sekarang">Pesan</button>
+                <div style="width:8px"></div>
+                <div>🛒</div>
+            </div>
+        </div>
+        <div class="cart-header">
+            <h3>🛒 Keranjang Belanja</h3>
+            <button class="cart-close" onclick="closeCart()" aria-label="Tutup keranjang">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <div class="empty-icon">🛒</div>
+                <p>Keranjang masih kosong.</p>
+                <p style="font-size:0.85rem;">Yuk, pilih menu favoritmu!</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-price" id="cartTotal">Rp 0</span>
+            </div>
+            <button class="btn-wa" id="btnWhatsApp" onclick="orderViaWhatsApp()" disabled>
+                💬 Pesan via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST ==================== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="assets/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
