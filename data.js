@@ -7,7 +7,7 @@ window.CONFIG = {
     "businessPhone": "6281355631765",
     "businessDescription": "Risoles Renyah & Pudding Lembut Rumahan",
     "aboutTitle": "Cerita dari Dapur Kecil Penuh Cinta",
-    "aboutMainText": "Dapur Rumahan berawal dari hobi membuat camilan untuk keluarga. Resep risoles dan pudding lembut favorit anak-anak kini hadir untuk Anda.",
+    "aboutMainText": "Dapur Rumahan berawal dari hobi membuat camilan untuk keluarga. Resep risoles warisan nenek dan pudding lembut favorit anak-anak kini hadir untuk Anda.",
     "aboutSubText": "Setiap produk kami buat fresh setiap hari menggunakan bahan-bahan pilihan. Kami percaya bahwa makanan rumahan terbaik lahir dari kesederhanaan, kebersihan, dan ketulusan.",
     "aboutImage": "assets/images/about_1786329499.jpg",
     "aboutHighlights": [
@@ -51,8 +51,8 @@ window.CONFIG = {
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "0",
-                    "created_at": "2026-08-12 22:35:41",
-                    "updated_at": "2026-08-12 22:35:41",
+                    "created_at": "2026-08-13 07:36:46",
+                    "updated_at": "2026-08-13 07:36:46",
                     "imageScale": 140,
                     "imageOffsetX": 0,
                     "imageOffsetY": 10
@@ -68,8 +68,8 @@ window.CONFIG = {
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "1",
-                    "created_at": "2026-08-12 22:35:41",
-                    "updated_at": "2026-08-12 22:35:41",
+                    "created_at": "2026-08-13 07:36:46",
+                    "updated_at": "2026-08-13 07:36:46",
                     "imageScale": 135,
                     "imageOffsetX": 0,
                     "imageOffsetY": 10
@@ -77,65 +77,121 @@ window.CONFIG = {
             ],
             "optionalGroups": [
                 {
-                    "id": "presentation",
+                    "id": "topping",
                     "product_id": "pudding",
-                    "label": "Tampilan",
+                    "label": "Serving",
                     "sort_order": "0",
-                    "created_at": "2026-08-12 22:35:41",
-                    "updated_at": "2026-08-12 22:35:41",
+                    "created_at": "2026-08-13 07:36:46",
+                    "updated_at": "2026-08-13 07:36:46",
                     "options": [
                         {
-                            "id": "normal",
-                            "group_id": "presentation",
+                            "id": "serv-opt1",
+                            "group_id": "topping",
                             "product_id": "pudding",
                             "name": "Normal",
                             "adjustment": 0,
+                            "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-12 22:35:41",
-                            "updated_at": "2026-08-12 22:35:41",
+                            "created_at": "2026-08-13 07:36:46",
+                            "updated_at": "2026-08-13 07:36:46",
                             "adj": 0
                         },
                         {
-                            "id": "pisah-topping",
-                            "group_id": "presentation",
+                            "id": "serv-opt2",
+                            "group_id": "topping",
                             "product_id": "pudding",
-                            "name": "Pisah Topping",
+                            "name": "Pisah Saos",
                             "adjustment": 0,
+                            "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-12 22:35:41",
-                            "updated_at": "2026-08-12 22:35:41",
+                            "created_at": "2026-08-13 07:36:46",
+                            "updated_at": "2026-08-13 07:36:46",
                             "adj": 0
                         }
                     ]
                 },
                 {
-                    "id": "topping",
+                    "id": "serving",
                     "product_id": "pudding",
-                    "label": "Tekstur Topping",
+                    "label": "Topping",
                     "sort_order": "1",
-                    "created_at": "2026-08-12 22:35:41",
-                    "updated_at": "2026-08-12 22:35:41",
+                    "created_at": "2026-08-13 07:36:46",
+                    "updated_at": "2026-08-13 07:36:46",
                     "options": [
                         {
-                            "id": "halus",
-                            "group_id": "topping",
+                            "id": "toppings-opt1",
+                            "group_id": "serving",
                             "product_id": "pudding",
-                            "name": "Topping Halus",
+                            "name": "Kasar",
                             "adjustment": 0,
+                            "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-12 22:35:41",
-                            "updated_at": "2026-08-12 22:35:41",
+                            "created_at": "2026-08-13 07:36:46",
+                            "updated_at": "2026-08-13 07:36:46",
                             "adj": 0
                         },
                         {
-                            "id": "kasar",
-                            "group_id": "topping",
+                            "id": "toppings-opt2",
+                            "group_id": "serving",
                             "product_id": "pudding",
-                            "name": "Topping Kasar",
+                            "name": "Halus",
                             "adjustment": 0,
+                            "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-12 22:35:41",
-                            "updated_at": "2026-08-12 22:35:41",
+                            "created_at": "2026-08-13 07:36:46",
+                            "updated_at": "2026-08-13 07:36:46",
+                            "adj": 0
+                        }
+                    ]
+                },
+                {
+                    "id": "ukuran",
+                    "product_id": "pudding",
+                    "label": "Ukuran",
+                    "sort_order": "2",
+                    "created_at": "2026-08-13 07:36:46",
+                    "updated_at": "2026-08-13 07:36:46",
+                    "options": [
+                        {
+                            "id": "ukuran-opt1",
+                            "group_id": "ukuran",
+                            "product_id": "pudding",
+                            "name": "Normal ",
+                            "adjustment": 0,
+                            "overrides": [],
+                            "sort_order": "0",
+                            "created_at": "2026-08-13 07:36:46",
+                            "updated_at": "2026-08-13 07:36:46",
+                            "adj": 0
+                        },
+                        {
+                            "id": "ukuran-opt2",
+                            "group_id": "ukuran",
+                            "product_id": "pudding",
+                            "name": "Sedang (500ml)",
+                            "adjustment": 0,
+                            "overrides": {
+                                "silverqueen": -80000,
+                                "regal": -60000
+                            },
+                            "sort_order": "1",
+                            "created_at": "2026-08-13 07:36:46",
+                            "updated_at": "2026-08-13 07:36:46",
+                            "adj": 0
+                        },
+                        {
+                            "id": "ukuran-opt3",
+                            "group_id": "ukuran",
+                            "product_id": "pudding",
+                            "name": "Kecil (100ml)",
+                            "adjustment": 0,
+                            "overrides": {
+                                "silverqueen": -116000,
+                                "regal": -118000
+                            },
+                            "sort_order": "2",
+                            "created_at": "2026-08-13 07:36:46",
+                            "updated_at": "2026-08-13 07:36:46",
                             "adj": 0
                         }
                     ]
@@ -170,7 +226,7 @@ window.CONFIG = {
                 {
                     "id": "sosis",
                     "product_id": "risoles",
-                    "name": "Risoles Mayo",
+                    "name": "Risoles Sosis",
                     "description": "{\"imageScale\":190,\"imageOffsetX\":0,\"imageOffsetY\":50}",
                     "image": "assets/images/sosis mayo-nobg.webp",
                     "price": "5000",
@@ -178,8 +234,8 @@ window.CONFIG = {
                     "flavor_type": "asin",
                     "status": "available",
                     "sort_order": "0",
-                    "created_at": "2026-08-12 22:34:13",
-                    "updated_at": "2026-08-12 22:34:13",
+                    "created_at": "2026-08-13 07:27:37",
+                    "updated_at": "2026-08-13 07:27:37",
                     "imageScale": 190,
                     "imageOffsetX": 0,
                     "imageOffsetY": 50
@@ -195,8 +251,8 @@ window.CONFIG = {
                     "flavor_type": "asin",
                     "status": "coming_soon",
                     "sort_order": "1",
-                    "created_at": "2026-08-12 22:34:13",
-                    "updated_at": "2026-08-12 22:34:13",
+                    "created_at": "2026-08-13 07:27:37",
+                    "updated_at": "2026-08-13 07:27:37",
                     "imageScale": 190,
                     "imageOffsetX": 0,
                     "imageOffsetY": 50
@@ -212,8 +268,8 @@ window.CONFIG = {
                     "flavor_type": "asin",
                     "status": "coming_soon",
                     "sort_order": "2",
-                    "created_at": "2026-08-12 22:34:13",
-                    "updated_at": "2026-08-12 22:34:13",
+                    "created_at": "2026-08-13 07:27:37",
+                    "updated_at": "2026-08-13 07:27:37",
                     "imageScale": 190,
                     "imageOffsetX": 0,
                     "imageOffsetY": 50
@@ -224,16 +280,16 @@ window.CONFIG = {
                     "name": "Choco Cheese",
                     "description": "{\"imageScale\":200,\"imageOffsetX\":0,\"imageOffsetY\":45,\"minOrder\":5}",
                     "image": "assets/images/risoles-choco-cheese.webp",
-                    "price": "5000",
+                    "price": "3000",
                     "note": "Nikmat Rasakan Gurih dan Coklat",
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "3",
-                    "created_at": "2026-08-12 22:34:13",
-                    "updated_at": "2026-08-12 22:34:13",
+                    "created_at": "2026-08-13 07:27:37",
+                    "updated_at": "2026-08-13 07:27:37",
                     "imageScale": 200,
                     "imageOffsetX": 0,
-                    "imageOffsetY": 75,
+                    "imageOffsetY": 45,
                     "minOrder": 5
                 }
             ],
@@ -243,8 +299,8 @@ window.CONFIG = {
                     "product_id": "risoles",
                     "label": "Penyajian",
                     "sort_order": "0",
-                    "created_at": "2026-08-12 22:34:13",
-                    "updated_at": "2026-08-12 22:34:13",
+                    "created_at": "2026-08-13 07:27:37",
+                    "updated_at": "2026-08-13 07:27:37",
                     "options": [
                         {
                             "id": "goreng",
@@ -252,9 +308,10 @@ window.CONFIG = {
                             "product_id": "risoles",
                             "name": "Goreng",
                             "adjustment": 0,
+                            "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-12 22:34:13",
-                            "updated_at": "2026-08-12 22:34:13",
+                            "created_at": "2026-08-13 07:27:37",
+                            "updated_at": "2026-08-13 07:27:37",
                             "adj": 0
                         },
                         {
@@ -262,11 +319,12 @@ window.CONFIG = {
                             "group_id": "serving",
                             "product_id": "risoles",
                             "name": "Frozen",
-                            "adjustment": -500,
+                            "adjustment": -1000,
+                            "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-12 22:34:13",
-                            "updated_at": "2026-08-12 22:34:13",
-                            "adj": -500
+                            "created_at": "2026-08-13 07:27:37",
+                            "updated_at": "2026-08-13 07:27:37",
+                            "adj": -1000
                         }
                     ]
                 },
@@ -275,8 +333,8 @@ window.CONFIG = {
                     "product_id": "risoles",
                     "label": "Pilihan Isi",
                     "sort_order": "1",
-                    "created_at": "2026-08-12 22:34:13",
-                    "updated_at": "2026-08-12 22:34:13",
+                    "created_at": "2026-08-13 07:27:37",
+                    "updated_at": "2026-08-13 07:27:37",
                     "options": [
                         {
                             "id": "normal",
@@ -284,9 +342,10 @@ window.CONFIG = {
                             "product_id": "risoles",
                             "name": "Normal",
                             "adjustment": 0,
+                            "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-12 22:34:13",
-                            "updated_at": "2026-08-12 22:34:13",
+                            "created_at": "2026-08-13 07:27:37",
+                            "updated_at": "2026-08-13 07:27:37",
                             "adj": 0
                         },
                         {
@@ -295,9 +354,10 @@ window.CONFIG = {
                             "product_id": "risoles",
                             "name": "Tanpa Telur",
                             "adjustment": -500,
+                            "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-12 22:34:13",
-                            "updated_at": "2026-08-12 22:34:13",
+                            "created_at": "2026-08-13 07:27:37",
+                            "updated_at": "2026-08-13 07:27:37",
                             "adj": -500
                         }
                     ]

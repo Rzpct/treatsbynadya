@@ -828,6 +828,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
+    flex: 1;
 }
 
 .mc-qty-box {

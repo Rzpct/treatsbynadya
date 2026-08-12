@@ -171,9 +171,8 @@
                 </div>
                 <div class="mc-body">
                     <p class="menu-note" id="${cat}NoteDisplay">${defaultNote}</p>
-                    <div id="${cat}Optional1"></div>
-                    <div id="${cat}Optional2" class="mt-2"></div>
-                    <div class="row g-2 align-items-center mt-1">
+                    <div id="${cat}OptionalGroupsContainer"></div>
+                    <div class="row g-2 align-items-center mt-auto">
                         <div class="col-12 col-md-5">
                             <div class="mc-qty-box w-100">
                                 <button type="button" onclick="changeQty('${cat}', -1)" aria-label="Kurang">−</button>
@@ -236,11 +235,20 @@
         const noteDisplay = document.getElementById(`${category}NoteDisplay`);
         if (noteDisplay) noteDisplay.textContent = currentSubmenu.note || product.note || '';
 
-        // Optional Groups (maks 2)
+        // Optional Groups (Mendukung jumlah dinamis)
         const optionalGroups = product.optionalGroups || [];
         const flavor = currentSubmenu.flavor_type || 'asin';
-        renderOptionalGroup(category, 0, optionalGroups[0], flavor);
-        if (optionalGroups.length > 1) renderOptionalGroup(category, 1, optionalGroups[1], flavor);
+        const optContainer = document.getElementById(`${category}OptionalGroupsContainer`);
+        if (optContainer) {
+            optContainer.innerHTML = '';
+            optionalGroups.forEach((group, idx) => {
+                const groupDiv = document.createElement('div');
+                groupDiv.id = `${category}Optional${idx + 1}`;
+                if (idx > 0) groupDiv.className = 'mt-2';
+                optContainer.appendChild(groupDiv);
+                renderOptionalGroup(category, idx, group, flavor);
+            });
+        }
 
         // Qty default berdasarkan sales_rules (dukung override per varian)
         const qtyEl = document.getElementById(`${category}Qty`);
@@ -289,28 +297,41 @@
             return;
         }
 
+        // Ambil ID varian yang sedang aktif untuk logika override
+        const product = config.products.find(p => p.id === category);
+        const submenus = product ? product.submenus : [];
+        const currentSubmenu = submenus[currentProductIndex[category]] || submenus[0];
+        const currentSubId = currentSubmenu ? currentSubmenu.id : null;
+
         $container.innerHTML = `
             <div class="option-group">
                 <label style="font-weight:600;display:block;margin-bottom:0.5rem;">
                     ${group.label || group.id}
                 </label>
                 <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-                    ${group.options.map((option, idx) => `
+                    ${(group.options || []).map((option, idx) => {
+                        let adj = parseInt(option.adj !== undefined ? option.adj : (option.adjustment || 0), 10);
+                        if (currentSubId && option.overrides && option.overrides[currentSubId] !== undefined) {
+                            adj = parseInt(option.overrides[currentSubId], 10);
+                        }
+                        
+                        return `
                         <label style="display:flex;align-items:center;cursor:pointer;">
                             <input 
                                 type="radio" 
                                 name="${category}_optional_${groupIndex}" 
                                 value="${option.id}"
-                                data-adjustment="${option.adj || option.adjustment || 0}"
+                                data-adjustment="${adj}"
                                 ${idx === 0 ? 'checked' : ''}
                                 onchange="updateProductPrice('${category}')"
                             >
                             <span style="margin-left:0.4rem;font-size:0.9rem;">
                                 ${option.name}
-                                ${(option.adj || option.adjustment) ? `<span style="color:#666;font-size:0.8rem;"> (${(option.adj || option.adjustment) > 0 ? '+' : ''}${option.adj || option.adjustment})</span>` : ''}
+                                ${adj ? `<span style="color:#666;font-size:0.8rem;"> (${adj > 0 ? '+' : ''}${adj})</span>` : ''}
                             </span>
                         </label>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `;
@@ -341,6 +362,22 @@
         if (priceDisplay) {
             priceDisplay.textContent = `Rp ${finalPrice.toLocaleString('id-ID')} / pcs`;
             priceDisplay.dataset.finalPrice = finalPrice;
+        }
+
+        // Auto adjust quantity if current is below new minimum order, or if it was stuck on a previous high minimum
+        const rules = getProductRules(category);
+        const qtyEl = document.getElementById(`${category}Qty`);
+        if (qtyEl) {
+            let currentQty = parseInt(qtyEl.textContent, 10) || 0;
+            let lastAutoMin = parseInt(qtyEl.dataset.lastAutoMin, 10) || 0;
+            
+            // Jika quantity saat ini kurang dari minOrder BARU, 
+            // ATAU jika quantity saat ini kebetulan persis sama dengan minOrder LAMA (berarti hasil auto-force) dan minOrder baru lebih kecil
+            if (currentQty < rules.minOrder || (currentQty === lastAutoMin && rules.minOrder < currentQty)) {
+                qtyEl.textContent = rules.minOrder;
+            }
+            // Simpan jejak minOrder saat ini
+            qtyEl.dataset.lastAutoMin = rules.minOrder;
         }
     };
 
@@ -377,9 +414,34 @@
         const idx = currentProductIndex[productId] || 0;
         const currentSubmenu = submenus[idx];
         
-        if (currentSubmenu && currentSubmenu.minOrder !== undefined && currentSubmenu.minOrder !== null) {
-            const min = parseInt(currentSubmenu.minOrder, 10) || 1;
-            return { minOrder: min, defaultStep: min };
+        if (currentSubmenu) {
+            let min = 1;
+            let step = 1;
+
+            // 1. Ambil dari aturan spesifik varian (jika ada)
+            if (currentSubmenu.minOrder !== undefined && currentSubmenu.minOrder !== null) {
+                min = parseInt(currentSubmenu.minOrder, 10) || 1;
+                step = min;
+            } else if (product.sales_rules) {
+                // 2. Jika tidak ada override varian, gunakan aturan produk utama
+                const r = typeof product.sales_rules === 'string' ? JSON.parse(product.sales_rules) : product.sales_rules;
+                min = parseInt(r.minOrder, 10) || 1;
+                step = parseInt(r.defaultStep, 10) || 1;
+            }
+            
+            // 3. Cek override berdasarkan opsi yang dipilih (prioritas tertinggi)
+            if (currentSubmenu.optionMinOrder) {
+                const optionalGroups = product.optionalGroups || [];
+                optionalGroups.forEach((group, idx) => {
+                    const selected = document.querySelector(`input[name="${productId}_optional_${idx}"]:checked`);
+                    if (selected && currentSubmenu.optionMinOrder[selected.value]) {
+                        min = parseInt(currentSubmenu.optionMinOrder[selected.value], 10);
+                        step = min;
+                    }
+                });
+            }
+
+            return { minOrder: min, defaultStep: step };
         }
 
         // Jika tidak ada override varian, gunakan aturan produk utama
