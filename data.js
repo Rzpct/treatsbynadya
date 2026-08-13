@@ -347,7 +347,7 @@ window.CONFIG = {
                     "updated_at": "2026-08-13 07:27:37",
                     "options": [
                         {
-                            "id": "Telur",
+                            "id": "normal",
                             "group_id": "variant",
                             "product_id": "risoles",
                             "name": "Telur",
