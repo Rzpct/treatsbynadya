@@ -350,7 +350,7 @@ window.CONFIG = {
                             "id": "Telur",
                             "group_id": "variant",
                             "product_id": "risoles",
-                            "name": "Normal",
+                            "name": "Telur",
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "0",
