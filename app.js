@@ -38,7 +38,7 @@
 
         if (config.businessName) {
             document.querySelectorAll('.nav-logo').forEach(el => {
-                const logoSrc = config.aboutImage || 'assets/images/about.jpg';
+                const logoSrc = config.aboutImage || 'assets/images/profile.jpg';
                 el.innerHTML = `<img src="${logoSrc}" alt="Logo" class="logo-icon-img"> ${config.businessName}`;
             });
             const footerName = document.querySelector('.footer strong');
