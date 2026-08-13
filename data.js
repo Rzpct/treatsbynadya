@@ -56,6 +56,11 @@ window.CONFIG = {
                     "imageScale": 140,
                     "imageOffsetX": 0,
                     "imageOffsetY": 10
+                    "optionMinOrder": {
+    "ukuran-opt1": 1,      // "Normal" → minimal order 1
+    "ukuran-opt2": 1,      // "Sedang (500ml)" → minimal order 1
+    "ukuran-opt3": 15      // "Kecil (100ml)" → minimal order 15
+                }
                 },
                 {
                     "id": "regal",
@@ -73,6 +78,11 @@ window.CONFIG = {
                     "imageScale": 135,
                     "imageOffsetX": 0,
                     "imageOffsetY": 10
+                    "optionMinOrder": {
+    "ukuran-opt1": 1,      // "Normal" → minimal order 1
+    "ukuran-opt2": 1,      // "Sedang (500ml)" → minimal order 1
+    "ukuran-opt3": 15      // "Kecil (100ml)" → minimal order 15
+}
                 }
             ],
             "optionalGroups": [
