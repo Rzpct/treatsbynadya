@@ -290,7 +290,7 @@ window.CONFIG = {
                     "name": "Choco Cheese",
                     "description": "{\"imageScale\":200,\"imageOffsetX\":0,\"imageOffsetY\":45,\"minOrder\":5}",
                     "image": "assets/images/risoles-choco-cheese.webp",
-                    "price": "3000",
+                    "price": "5000",
                     "note": "Nikmat Rasakan Gurih dan Coklat",
                     "flavor_type": "manis",
                     "status": "available",
