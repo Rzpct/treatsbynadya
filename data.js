@@ -55,7 +55,7 @@ window.CONFIG = {
                     "updated_at": "2026-08-13 07:36:46",
                     "imageScale": 140,
                     "imageOffsetX": 0,
-                    "imageOffsetY": 10
+                    "imageOffsetY": 10,
                     "optionMinOrder": {
     "ukuran-opt1": 1,      // "Normal" → minimal order 1
     "ukuran-opt2": 1,      // "Sedang (500ml)" → minimal order 1
@@ -77,7 +77,7 @@ window.CONFIG = {
                     "updated_at": "2026-08-13 07:36:46",
                     "imageScale": 135,
                     "imageOffsetX": 0,
-                    "imageOffsetY": 10
+                    "imageOffsetY": 10,
                     "optionMinOrder": {
     "ukuran-opt1": 1,      // "Normal" → minimal order 1
     "ukuran-opt2": 1,      // "Sedang (500ml)" → minimal order 1
