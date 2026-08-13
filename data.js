@@ -197,7 +197,7 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": {
                                 "silverqueen": -116000,
-                                "regal": -118000
+                                "regal": -88000
                             },
                             "sort_order": "2",
                             "created_at": "2026-08-13 07:36:46",
