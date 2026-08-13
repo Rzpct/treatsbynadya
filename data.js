@@ -9,7 +9,7 @@ window.CONFIG = {
     "aboutTitle": "Cerita dari Dapur Kecil Penuh Cinta",
     "aboutMainText": "Dapur Rumahan berawal dari hobi membuat camilan untuk keluarga. Resep risoles warisan nenek dan pudding lembut favorit anak-anak kini hadir untuk Anda.",
     "aboutSubText": "Setiap produk kami buat fresh setiap hari menggunakan bahan-bahan pilihan. Kami percaya bahwa makanan rumahan terbaik lahir dari kesederhanaan, kebersihan, dan ketulusan.",
-    "aboutImage": "assets/images/about_1786329499.jpg",
+    "aboutImage": "assets/images/profile.jpg",
     "aboutHighlights": [
         "Bahan Segar",
         "Higienis",
