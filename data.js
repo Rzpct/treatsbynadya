@@ -71,6 +71,7 @@ window.CONFIG = {
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "1",
+                    "hideOptionalGroups": true,
                     "created_at": "2026-08-14 22:46:07",
                     "updated_at": "2026-08-14 22:46:07",
                     "imageScale": 180,
