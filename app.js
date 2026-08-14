@@ -1,7 +1,7 @@
 // ==================== DAPUR RUMAHAN - APP.JS ====================
 // Frontend logic untuk menampilkan menu, bisnis info, dan cart
 
-(function() {
+(function () {
     'use strict';
 
     // ============ STATE ============
@@ -141,10 +141,10 @@
         $grid.innerHTML = products.map((product, i) => {
             const cat = product.id;
             const firstSub = (product.submenus && product.submenus[0]) || {};
-            const defaultImg   = firstSub.image || product.image || '';
-            const defaultTitle = firstSub.name  || product.name  || '';
+            const defaultImg = firstSub.image || product.image || '';
+            const defaultTitle = firstSub.name || product.name || '';
             const defaultPrice = parseInt(firstSub.price, 10) || 0;
-            const defaultNote  = firstSub.note  || product.note  || '';
+            const defaultNote = firstSub.note || product.note || '';
 
             // Kartu terakhir pada grid ganjil mendapat kelas full-width
             const isLastOdd = (count % 2 !== 0 && i === count - 1);
@@ -154,7 +154,7 @@
             let stepQty = 1;
             if (product.sales_rules) {
                 const sr = typeof product.sales_rules === 'string' ? JSON.parse(product.sales_rules) : product.sales_rules;
-                minQty  = parseInt(sr.minOrder,    10) || 1;
+                minQty = parseInt(sr.minOrder, 10) || 1;
                 stepQty = parseInt(sr.defaultStep, 10) || 1;
             }
 
@@ -205,21 +205,21 @@
         if (!currentSubmenu) return;
 
         // Title
-        const titleBack  = document.getElementById(`${category}TitleDisplayBack`);
+        const titleBack = document.getElementById(`${category}TitleDisplayBack`);
         const titleFront = document.getElementById(`${category}TitleDisplayFront`);
         let titleText = currentSubmenu.name || product.name;
-        if (titleBack)  titleBack.innerHTML  = titleText;
+        if (titleBack) titleBack.innerHTML = titleText;
         if (titleFront) titleFront.innerHTML = titleText;
 
         // Image
         const imgDisplay = document.getElementById(`${category}ImgDisplay`);
         if (imgDisplay) {
             imgDisplay.src = currentSubmenu.image || product.image || '';
-            imgDisplay.alt = currentSubmenu.name  || product.name;
-            const scale   = parseInt(currentSubmenu.imageScale,   10) || 100;
+            imgDisplay.alt = currentSubmenu.name || product.name;
+            const scale = parseInt(currentSubmenu.imageScale, 10) || 100;
             const offsetX = parseInt(currentSubmenu.imageOffsetX, 10) || 0;
             const offsetY = parseInt(currentSubmenu.imageOffsetY, 10) || 0;
-            imgDisplay.style.transform       = `scale(${scale / 100}) translate(${offsetX}px, ${offsetY}px)`;
+            imgDisplay.style.transform = `scale(${scale / 100}) translate(${offsetX}px, ${offsetY}px)`;
             imgDisplay.style.transformOrigin = 'center bottom';
         }
 
@@ -227,7 +227,7 @@
         const priceDisplay = document.getElementById(`${category}PriceDisplay`);
         if (priceDisplay) {
             const basePrice = parseInt(currentSubmenu.price, 10) || 0;
-            priceDisplay.textContent       = `Rp ${basePrice.toLocaleString('id-ID')} / pcs`;
+            priceDisplay.textContent = `Rp ${basePrice.toLocaleString('id-ID')} / pcs`;
             priceDisplay.dataset.basePrice = basePrice;
         }
 
@@ -241,13 +241,15 @@
         const optContainer = document.getElementById(`${category}OptionalGroupsContainer`);
         if (optContainer) {
             optContainer.innerHTML = '';
-            optionalGroups.forEach((group, idx) => {
-                const groupDiv = document.createElement('div');
-                groupDiv.id = `${category}Optional${idx + 1}`;
-                if (idx > 0) groupDiv.className = 'mt-2';
-                optContainer.appendChild(groupDiv);
-                renderOptionalGroup(category, idx, group, flavor);
-            });
+            if (!currentSubmenu.hideOptionalGroups) {
+                optionalGroups.forEach((group, idx) => {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.id = `${category}Optional${idx + 1}`;
+                    if (idx > 0) groupDiv.className = 'mt-2';
+                    optContainer.appendChild(groupDiv);
+                    renderOptionalGroup(category, idx, group, flavor);
+                });
+            }
         }
 
         // Qty default berdasarkan sales_rules (dukung override per varian)
@@ -264,7 +266,7 @@
         const badgeContainer = document.getElementById(`${category}StatusBadgeContainer`);
         const addBtn = document.getElementById(`${category}AddBtn`);
         const menuCard = document.getElementById(`menu-${category}`);
-        
+
         if (status === 'unavailable') {
             if (badgeContainer) badgeContainer.innerHTML = `<div class="status-badge status-unavailable">HABIS</div>`;
             if (addBtn) { addBtn.textContent = 'Sedang Habis'; addBtn.classList.add('disabled'); addBtn.classList.remove('active'); addBtn.disabled = true; }
@@ -310,12 +312,12 @@
                 </label>
                 <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
                     ${(group.options || []).map((option, idx) => {
-                        let adj = parseInt(option.adj !== undefined ? option.adj : (option.adjustment || 0), 10);
-                        if (currentSubId && option.overrides && option.overrides[currentSubId] !== undefined) {
-                            adj = parseInt(option.overrides[currentSubId], 10);
-                        }
-                        
-                        return `
+            let adj = parseInt(option.adj !== undefined ? option.adj : (option.adjustment || 0), 10);
+            if (currentSubId && option.overrides && option.overrides[currentSubId] !== undefined) {
+                adj = parseInt(option.overrides[currentSubId], 10);
+            }
+
+            return `
                         <label style="display:flex;align-items:center;cursor:pointer;">
                             <input 
                                 type="radio" 
@@ -331,14 +333,14 @@
                             </span>
                         </label>
                         `;
-                    }).join('')}
+        }).join('')}
                 </div>
             </div>
         `;
     }
 
     // ============ PRICE ADJUSTMENT ============
-    window.updateProductPrice = function(category) {
+    window.updateProductPrice = function (category) {
         if (!Array.isArray(config.products)) return;
         const product = config.products.find(p => p.id === category);
         if (!product) return;
@@ -370,7 +372,7 @@
         if (qtyEl) {
             let currentQty = parseInt(qtyEl.textContent, 10) || 0;
             let lastAutoMin = parseInt(qtyEl.dataset.lastAutoMin, 10) || 0;
-            
+
             // Jika quantity saat ini kurang dari minOrder BARU, 
             // ATAU jika quantity saat ini kebetulan persis sama dengan minOrder LAMA (berarti hasil auto-force) dan minOrder baru lebih kecil
             if (currentQty < rules.minOrder || (currentQty === lastAutoMin && rules.minOrder < currentQty)) {
@@ -382,7 +384,7 @@
     };
 
     // ============ SWITCH PRODUCT ============
-    window.switchProduct = function(category, direction) {
+    window.switchProduct = function (category, direction) {
         if (!Array.isArray(config.products)) return;
         const product = config.products.find(p => p.id === category);
         if (!product) return;
@@ -413,7 +415,7 @@
         const submenus = product.submenus || [];
         const idx = currentProductIndex[productId] || 0;
         const currentSubmenu = submenus[idx];
-        
+
         if (currentSubmenu) {
             let min = 1;
             let step = 1;
@@ -428,7 +430,7 @@
                 min = parseInt(r.minOrder, 10) || 1;
                 step = parseInt(r.defaultStep, 10) || 1;
             }
-            
+
             // 3. Cek override berdasarkan opsi yang dipilih (prioritas tertinggi)
             if (currentSubmenu.optionMinOrder) {
                 const optionalGroups = product.optionalGroups || [];
@@ -449,7 +451,7 @@
         const r = typeof product.sales_rules === 'string'
             ? JSON.parse(product.sales_rules) : product.sales_rules;
         return {
-            minOrder:    parseInt(r.minOrder,    10) || 1,
+            minOrder: parseInt(r.minOrder, 10) || 1,
             defaultStep: parseInt(r.defaultStep, 10) || 1
         };
     }
@@ -458,25 +460,25 @@
     function getRisolesRules() { return getProductRules('risoles'); }
 
     // Tombol qty universal untuk semua produk
-    window.changeQty = function(category, direction) {
+    window.changeQty = function (category, direction) {
         const qtyEl = document.getElementById(`${category}Qty`);
         if (!qtyEl) return;
         const rules = getProductRules(category);
-        const step  = rules.defaultStep;
-        const min   = rules.minOrder;
+        const step = rules.defaultStep;
+        const min = rules.minOrder;
         let currentQty = parseInt(qtyEl.textContent, 10);
         if (isNaN(currentQty) || currentQty < min) currentQty = min;
         qtyEl.textContent = Math.max(min, currentQty + (direction * step));
     };
 
     // Kompatibilitas mundur untuk fungsi qty lama
-    window.changeRisolesQty = function(dir) { window.changeQty('risoles', dir); };
-    window.changePuddingQty = function(dir) { window.changeQty('pudding', dir); };
+    window.changeRisolesQty = function (dir) { window.changeQty('risoles', dir); };
+    window.changePuddingQty = function (dir) { window.changeQty('pudding', dir); };
 
     // ============ ADD TO CART ============
-    window.addToCartByCategory = function(cat) { addToCart(cat); };
-    window.addRisolesToCart = function() { addToCart('risoles'); };
-    window.addPuddingToCart = function() { addToCart('pudding'); };
+    window.addToCartByCategory = function (cat) { addToCart(cat); };
+    window.addRisolesToCart = function () { addToCart('risoles'); };
+    window.addPuddingToCart = function () { addToCart('pudding'); };
 
     function addToCart(category) {
         if (!Array.isArray(config.products)) {
@@ -563,14 +565,14 @@
         }
     }
 
-    window.removeFromCart = function(itemId) {
+    window.removeFromCart = function (itemId) {
         cart = cart.filter(item => item.id !== itemId);
         saveCart();
         updateCartUI();
         showToast('🗑️ Item dihapus dari keranjang');
     };
 
-    window.updateItemQty = function(itemId, newQty) {
+    window.updateItemQty = function (itemId, newQty) {
         const item = cart.find(c => c.id === itemId);
         if (!item) return;
         const rules = getProductRules(item.category);
@@ -602,11 +604,11 @@
         }
 
         $container.innerHTML = cart.map(item => {
-            const rules  = getProductRules(item.category);
-            const step   = rules.defaultStep || 1;
-            const minQty = rules.minOrder    || 1;
+            const rules = getProductRules(item.category);
+            const step = rules.defaultStep || 1;
+            const minQty = rules.minOrder || 1;
             const prevQty = Math.max(minQty, item.qty - step);
-            const nextQty   = item.qty + step;
+            const nextQty = item.qty + step;
 
             return `
             <div class="cart-item">
@@ -663,7 +665,7 @@
         if ($cartOverlay) $cartOverlay.addEventListener('click', closeCart);
     }
 
-    window.openCart = function() {
+    window.openCart = function () {
         const $cartPanel = document.getElementById('cartPanel');
         const $cartOverlay = document.getElementById('cartOverlay');
         if ($cartPanel) $cartPanel.classList.add('open');
@@ -671,7 +673,7 @@
         document.body.style.overflow = 'hidden';
     };
 
-    window.closeCart = function() {
+    window.closeCart = function () {
         const $cartPanel = document.getElementById('cartPanel');
         const $cartOverlay = document.getElementById('cartOverlay');
         if ($cartPanel) $cartPanel.classList.remove('open');
@@ -680,7 +682,7 @@
     };
 
     // ============ WHATSAPP ORDER ============
-    window.orderViaWhatsApp = function() {
+    window.orderViaWhatsApp = function () {
         if (cart.length === 0) {
             showToast('❌ Keranjang masih kosong');
             return;
