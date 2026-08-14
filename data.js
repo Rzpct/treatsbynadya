@@ -172,7 +172,10 @@ window.CONFIG = {
                             "product_id": "pudding",
                             "name": "Sedang (500ml)",
                             "adjustment": 0,
-                            "overrides": [],
+                            "overrides":  {
+                                "silverqueen": -80000,
+                                "regal": -60000
+                            },
                             "sort_order": "1",
                             "created_at": "2026-08-14 22:15:43",
                             "updated_at": "2026-08-14 22:15:43",
