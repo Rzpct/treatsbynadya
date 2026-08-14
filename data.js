@@ -395,7 +395,7 @@ window.CONFIG = {
         {
             "id": "risoles",
             "name": "Risoles Sosis",
-            "image": "assets/images/risoles.webp",
+            "image": "assets/images/sosis mayo-nobg.webp",
             "description": "Kulit renyah, isian creamy.",
             "badge": "🔥 Best Seller",
             "rating": "5",
