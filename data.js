@@ -44,18 +44,19 @@ window.CONFIG = {
                     "id": "silverqueen",
                     "product_id": "pudding",
                     "name": "Pudding Silverqueen",
-                    "description": "{\"imageScale\":185,\"imageOffsetX\":0,\"imageOffsetY\":45,\"hideOptionalGroups\":false,\"optionMinOrder\":{\"ukuran-opt3\":15}}",
+                    "description": "",
                     "image": "assets/images/sq side angle.webp",
                     "price": "125000",
                     "note": "Chocolate Lovers",
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "0",
-                    "created_at": "2026-08-14 22:46:07",
-                    "updated_at": "2026-08-14 22:46:07",
+                    "created_at": "2026-08-15 10:09:02",
+                    "updated_at": "2026-08-15 10:09:02",
                     "imageScale": 185,
                     "imageOffsetX": 0,
                     "imageOffsetY": 45,
+                    "hiddenOptionalGroups": [],
                     "optionMinOrder": {
                         "ukuran-opt3": 15
                     }
@@ -64,19 +65,22 @@ window.CONFIG = {
                     "id": "regal",
                     "product_id": "pudding",
                     "name": "Pudding Regal",
-                    "description": "{\"imageScale\":180,\"imageOffsetX\":0,\"imageOffsetY\":50,\"hideOptionalGroups\":true,\"optionMinOrder\":{\"ukuran-opt3\":15}}",
+                    "description": "",
                     "image": "assets/images/regal side angle.webp",
                     "price": "95000",
                     "note": "Setiap Lapisan Punya Cerita",
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "1",
-                    "hideOptionalGroups": true,
-                    "created_at": "2026-08-14 22:46:07",
-                    "updated_at": "2026-08-14 22:46:07",
+                    "created_at": "2026-08-15 10:09:02",
+                    "updated_at": "2026-08-15 10:09:02",
                     "imageScale": 180,
                     "imageOffsetX": 0,
                     "imageOffsetY": 50,
+                    "hiddenOptionalGroups": [
+                        "topping",
+                        "serving"
+                    ],
                     "optionMinOrder": {
                         "ukuran-opt3": 15
                     }
@@ -88,8 +92,8 @@ window.CONFIG = {
                     "product_id": "pudding",
                     "label": "Serving",
                     "sort_order": "0",
-                    "created_at": "2026-08-14 22:46:07",
-                    "updated_at": "2026-08-14 22:46:07",
+                    "created_at": "2026-08-15 10:09:02",
+                    "updated_at": "2026-08-15 10:09:02",
                     "options": [
                         {
                             "id": "serv-opt1",
@@ -99,8 +103,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-14 22:46:07",
-                            "updated_at": "2026-08-14 22:46:07",
+                            "created_at": "2026-08-15 10:09:02",
+                            "updated_at": "2026-08-15 10:09:02",
                             "adj": 0
                         },
                         {
@@ -111,8 +115,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-14 22:46:07",
-                            "updated_at": "2026-08-14 22:46:07",
+                            "created_at": "2026-08-15 10:09:02",
+                            "updated_at": "2026-08-15 10:09:02",
                             "adj": 0
                         }
                     ]
@@ -122,8 +126,8 @@ window.CONFIG = {
                     "product_id": "pudding",
                     "label": "Topping",
                     "sort_order": "1",
-                    "created_at": "2026-08-14 22:46:07",
-                    "updated_at": "2026-08-14 22:46:07",
+                    "created_at": "2026-08-15 10:09:02",
+                    "updated_at": "2026-08-15 10:09:02",
                     "options": [
                         {
                             "id": "toppings-opt1",
@@ -133,8 +137,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-14 22:46:07",
-                            "updated_at": "2026-08-14 22:46:07",
+                            "created_at": "2026-08-15 10:09:02",
+                            "updated_at": "2026-08-15 10:09:02",
                             "adj": 0
                         },
                         {
@@ -145,8 +149,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-14 22:46:07",
-                            "updated_at": "2026-08-14 22:46:07",
+                            "created_at": "2026-08-15 10:09:02",
+                            "updated_at": "2026-08-15 10:09:02",
                             "adj": 0
                         }
                     ]
@@ -156,8 +160,8 @@ window.CONFIG = {
                     "product_id": "pudding",
                     "label": "Ukuran",
                     "sort_order": "2",
-                    "created_at": "2026-08-14 22:46:07",
-                    "updated_at": "2026-08-14 22:46:07",
+                    "created_at": "2026-08-15 10:09:02",
+                    "updated_at": "2026-08-15 10:09:02",
                     "options": [
                         {
                             "id": "ukuran-opt1",
@@ -167,8 +171,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-14 22:46:07",
-                            "updated_at": "2026-08-14 22:46:07",
+                            "created_at": "2026-08-15 10:09:02",
+                            "updated_at": "2026-08-15 10:09:02",
                             "adj": 0
                         },
                         {
@@ -177,13 +181,10 @@ window.CONFIG = {
                             "product_id": "pudding",
                             "name": "Sedang (500ml)",
                             "adjustment": 0,
-                            "overrides": {
-                                "silverqueen": -80000,
-                                "regal": -60000
-                            },
+                            "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-14 22:46:07",
-                            "updated_at": "2026-08-14 22:46:07",
+                            "created_at": "2026-08-15 10:09:02",
+                            "updated_at": "2026-08-15 10:09:02",
                             "adj": 0
                         },
                         {
@@ -192,13 +193,10 @@ window.CONFIG = {
                             "product_id": "pudding",
                             "name": "Kecil (100ml)",
                             "adjustment": 0,
-                            "overrides": {
-                                "silverqueen": -116000,
-                                "regal": -88000
-                            },
+                            "overrides": [],
                             "sort_order": "2",
-                            "created_at": "2026-08-14 22:46:07",
-                            "updated_at": "2026-08-14 22:46:07",
+                            "created_at": "2026-08-15 10:09:02",
+                            "updated_at": "2026-08-15 10:09:02",
                             "adj": 0
                         }
                     ]
@@ -211,7 +209,7 @@ window.CONFIG = {
             "parent_name": "",
             "emoji": "",
             "description": "",
-            "image": "",
+            "image": "assets/images/risoles.webp",
             "note": "",
             "is_best_seller": "0",
             "best_seller_badge": "",
@@ -225,7 +223,7 @@ window.CONFIG = {
             },
             "status": "available",
             "created_at": "2026-08-10 00:02:45",
-            "updated_at": "2026-08-12 22:29:14",
+            "updated_at": "2026-08-15 09:58:22",
             "imageScale": 100,
             "imageOffsetX": 0,
             "imageOffsetY": 0,
@@ -234,7 +232,7 @@ window.CONFIG = {
                     "id": "sosis",
                     "product_id": "risoles",
                     "name": "Risoles Sosis",
-                    "description": "{\"imageScale\":190,\"imageOffsetX\":0,\"imageOffsetY\":50}",
+                    "description": "",
                     "image": "assets/images/sosis mayo-nobg.webp",
                     "price": "5000",
                     "note": "Pilihan aman untuk semua pelanggan.",
@@ -251,7 +249,7 @@ window.CONFIG = {
                     "id": "ragout",
                     "product_id": "risoles",
                     "name": "Risoles Ragout",
-                    "description": "{\"imageScale\":190,\"imageOffsetX\":0,\"imageOffsetY\":50}",
+                    "description": "",
                     "image": "assets/images/ragout-nobg.webp",
                     "price": "6000",
                     "note": "Cocok untuk yang ingin rasa lebih gurih.",
@@ -268,7 +266,7 @@ window.CONFIG = {
                     "id": "smoke-beef",
                     "product_id": "risoles",
                     "name": "Risoles Smoke Beef",
-                    "description": "{\"imageScale\":190,\"imageOffsetX\":0,\"imageOffsetY\":50}",
+                    "description": "",
                     "image": "assets/images/smokebeef-nobg.webp",
                     "price": "7000",
                     "note": "Varian paling premium dari keluarga risoles.",
@@ -285,7 +283,7 @@ window.CONFIG = {
                     "id": "risoles-var1",
                     "product_id": "risoles",
                     "name": "Choco Cheese",
-                    "description": "{\"imageScale\":200,\"imageOffsetX\":0,\"imageOffsetY\":80,\"minOrder\":5}",
+                    "description": "",
                     "image": "assets/images/risoles-choco-cheese.webp",
                     "price": "6000",
                     "note": "Rasakan perpaduan coklat dan keju",
@@ -303,8 +301,8 @@ window.CONFIG = {
                     "id": "risoles-var2",
                     "product_id": "risoles",
                     "name": "Chocolate",
-                    "description": "{\"imageScale\":200,\"imageOffsetX\":0,\"imageOffsetY\":90,\"minOrder\":5,\"optionMinOrder\":[]}",
-                    "image": "assets/images/risoles-chocolate.webp",
+                    "description": "",
+                    "image": "assets/images/submenu_1786716496.webp",
                     "price": "6000",
                     "note": "Nikmat Rasakan Gurih dan Coklat",
                     "flavor_type": "manis",
@@ -395,7 +393,7 @@ window.CONFIG = {
         {
             "id": "risoles",
             "name": "Risoles Sosis",
-            "image": "assets/images/sosis mayo-nobg.webp",
+            "image": "assets/images/risoles.webp",
             "description": "Kulit renyah, isian creamy.",
             "badge": "🔥 Best Seller",
             "rating": "5",
@@ -469,7 +467,7 @@ window.CONFIG = {
     ]
 };
 
-window.loadConfig = async function () {
+window.loadConfig = async function() {
     return window.CONFIG;
 };
 
