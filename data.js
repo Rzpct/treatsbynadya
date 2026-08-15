@@ -4,7 +4,7 @@
 
 window.CONFIG = {
     "businessName": "Treats by Nad",
-    "businessPhone": "6281355631765",
+    "businessPhone": "6287742379234",
     "businessDescription": "Risoles Renyah & Pudding Lembut Rumahan",
     "aboutTitle": "Cerita dari Dapur Kecil Penuh Cinta",
     "aboutMainText": "Dapur Rumahan berawal dari hobi membuat camilan untuk keluarga. Resep risoles warisan nenek dan pudding lembut favorit anak-anak kini hadir untuk Anda.",
