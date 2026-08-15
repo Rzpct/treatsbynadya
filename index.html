@@ -18,15 +18,21 @@
                 <img src="assets/images/profile.jpg" alt="Logo" class="logo-icon-img"> Dapur Rumahan
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#hero" class="active">Beranda</a></li>
-                <li><a href="#about">Profil</a></li>
-                <li><a href="#best-seller">Best Seller</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#testimoni">Testimoni</a></li>
+                <li><a href="#hero" class="active" data-i18n="Beranda">Beranda</a></li>
+                <li><a href="#about" data-i18n="Profil">Profil</a></li>
+                <li><a href="#best-seller" data-i18n="Best Seller">Best Seller</a></li>
+                <li><a href="#menu" data-i18n="Menu">Menu</a></li>
+                <li><a href="#testimoni" data-i18n="Testimoni">Testimoni</a></li>
                 <li>
                     <button class="nav-cart-btn btn" onclick="openCart()" aria-label="Buka keranjang">
-                        🛒 Keranjang <span class="cart-badge" id="cartBadge">0</span>
+                        <span id="cartBadgeParent" data-i18n="Keranjang">🛒 Keranjang</span> <span class="cart-badge"
+                            id="cartBadge">0</span>
                     </button>
+                </li>
+                <li>
+                    <button id="langToggleBtn" class="btn btn-outline"
+                        style="padding:4px 8px;font-size:0.8rem;margin-left:8px;" onclick="toggleLanguage()">🇮🇩
+                        ID</button>
                 </li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -38,13 +44,16 @@
     <!-- ==================== HERO SECTION ==================== -->
     <section class="hero" id="hero">
         <div class="hero-content">
-            <span class="hero-badge">🏠 Homemade Since 2021</span>
-            <h1>Risoles Renyah &amp; <span class="highlight">Pudding Lembut</span> Rumahan</h1>
-            <p>Dibuat dengan bahan berkualitas, dan cinta di setiap gigitan. Tersedia dalam opsi
+            <span class="hero-badge" data-i18n="Homemade Since 2021">🏠 Homemade Since 2021</span>
+            <h1 data-i18n="Risoles Renyah & Pudding Lembut Rumahan">Risoles Renyah &amp; <span class="highlight">Pudding
+                    Lembut</span> Rumahan</h1>
+            <p
+                data-i18n="Dibuat dengan bahan berkualitas dan cinta di setiap gigitan. Tersedia dalam opsi goreng hangat atau frozen siap simpan.">
+                Dibuat dengan bahan berkualitas, resep turun-temurun, dan cinta di setiap gigitan. Tersedia dalam opsi
                 goreng hangat atau frozen siap simpan.</p>
             <div class="hero-buttons">
-                <a href="#menu" class="btn btn-primary">📋 Lihat Menu</a>
-                <a href="#about" class="btn btn-outline">👩‍🍳 Tentang Kami</a>
+                <a href="#menu" class="btn btn-primary" data-i18n="Lihat Menu">📋 Lihat Menu</a>
+                <a href="#about" class="btn btn-outline" data-i18n="Tentang Kami">👩‍🍳 Tentang Kami</a>
             </div>
         </div>
         <div class="hero-visual">
@@ -62,15 +71,18 @@
                     style="width:100%;height:100%;object-fit:cover;border-radius:20px;">
             </div>
             <div class="about-text">
-                <span class="section-label">Profil Kami</span>
-                <h2>Cerita dari Dapur Kecil Penuh Cinta</h2>
+                <span class="section-label" data-i18n="Profil Kami">Profil Kami</span>
+                <h2 data-i18n="Cerita dari Dapur Kecil Penuh Cinta">Cerita dari Dapur Kecil Penuh Cinta</h2>
                 <p>
-                    <strong>Dapur Rumahan</strong> berawal dari hobi membuat camilan untuk keluarga. Resep risoles
-                dan pudding lembut favorit anak-anak kini hadir untuk Anda.
+                    <strong
+                        data-i18n="Dapur Rumahan berawal dari hobi membuat camilan untuk keluarga. Resep risoles warisan nenek dan pudding lembut favorit anak-anak kini hadir untuk Anda.">Dapur
+                        Rumahan berawal dari hobi membuat camilan untuk keluarga. Resep risoles
+                        dan pudding lembut favorit anak-anak kini hadir untuk Anda.</strong>
                 </p>
-                <p>
-                    Setiap produk kami buat <strong>fresh setiap hari</strong> menggunakan bahan-bahan pilihan. Kami
-                    percaya bahwa makanan rumahan terbaik lahir dari kesederhanaan, kebersihan, dan ketulusan.
+                <p
+                    data-i18n="Setiap produk kami buat fresh setiap hari menggunakan bahan-bahan pilihan. Kami percaya bahwa makanan rumahan terbaik lahir dari kesederhanaan, kebersihan, dan ketulusan.">
+                    Setiap produk kami buat fresh setiap hari menggunakan bahan-bahan pilihan. Kami percaya bahwa
+                    makanan rumahan terbaik lahir dari kesederhanaan, kebersihan, dan ketulusan.
                 </p>
                 <div class="about-highlights">
                     <div class="about-highlight">
@@ -90,10 +102,11 @@
                 <div class="about-social">
                     <p class="social-label">Ikuti kami di media sosial</p>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/treatsby.nad/" target="_blank" rel="noopener noreferrer" 
-                           class="social-icon instagram" aria-label="Follow kami di Instagram">
+                        <a href="https://www.instagram.com/treatsby.nad/" target="_blank" rel="noopener noreferrer"
+                            class="social-icon instagram" aria-label="Follow kami di Instagram">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z" />
                             </svg>
                             <span>@treatsby.nad</span>
                         </a>
@@ -106,9 +119,10 @@
     <!-- ==================== BEST SELLER ==================== -->
     <section class="section best-seller-section" id="best-seller">
         <div class="section-header">
-            <span class="section-label">🌟 Best Seller</span>
-            <h2 class="section-title">Paling Banyak Dipesan</h2>
-            <p class="section-subtitle">Inilah produk-produk andalan yang selalu jadi favorit pelanggan setia kami.</p>
+            <span class="section-label" data-i18n="Best Seller">🌟 Best Seller</span>
+            <h2 class="section-title" data-i18n="Pilihan Favorit Pelanggan">Paling Banyak Dipesan</h2>
+            <p class="section-subtitle" data-i18n="Menu paling laris dan disukai">Inilah produk-produk andalan yang
+                selalu jadi favorit pelanggan setia kami.</p>
         </div>
         <div class="best-seller-grid" id="bestSellerGrid">
             <!-- Best seller cards rendered by app.js from CONFIG.bestSellers -->
@@ -118,8 +132,8 @@
     <!-- ==================== MENU SECTION ==================== -->
     <section class="section menu-section" id="menu">
         <div class="section-header">
-            <span class="section-label">📋 Menu Kami</span>
-            <h2 class="section-title">Pilih &amp; Pesan Sekarang</h2>
+            <span class="section-label" data-i18n="Menu">📋 Menu Kami</span>
+            <h2 class="section-title" data-i18n="Pilihan Menu Utama">Pilih &amp; Pesan Sekarang</h2>
             <p class="section-subtitle">Semua menu tersedia fresh, langsung dari dapur kami ke tangan Anda.</p>
         </div>
         <div class="menu-grid" id="menuGrid">
@@ -164,7 +178,8 @@
 
     <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
-        <p>&copy; 2026 <strong>Dapur Rumahan</strong> — Risoles &amp; Pudding Homemade. Made with ❤️ dari dapur kecil kami
+        <p>&copy; 2026 <strong>Dapur Rumahan</strong> — Risoles &amp; Pudding Homemade. Made with ❤️ dari dapur kecil
+            kami
             untuk Anda.</p>
     </footer>
 
@@ -214,6 +229,7 @@
 
     <!-- ==================== SCRIPTS ==================== -->
     <script src="assets/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lang.js"></script>
     <script src="data.js"></script>
     <script src="app.js"></script>
 </body>
