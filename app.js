@@ -241,15 +241,13 @@
         const optContainer = document.getElementById(`${category}OptionalGroupsContainer`);
         if (optContainer) {
             optContainer.innerHTML = '';
-            if (!currentSubmenu.hideOptionalGroups) {
-                optionalGroups.forEach((group, idx) => {
-                    const groupDiv = document.createElement('div');
-                    groupDiv.id = `${category}Optional${idx + 1}`;
-                    if (idx > 0) groupDiv.className = 'mt-2';
-                    optContainer.appendChild(groupDiv);
-                    renderOptionalGroup(category, idx, group, flavor);
-                });
-            }
+            optionalGroups.forEach((group, idx) => {
+                const groupDiv = document.createElement('div');
+                groupDiv.id = `${category}Optional${idx + 1}`;
+                if (idx > 0) groupDiv.className = 'mt-2';
+                optContainer.appendChild(groupDiv);
+                renderOptionalGroup(category, idx, group, flavor);
+            });
         }
 
         // Qty default berdasarkan sales_rules (dukung override per varian)
@@ -304,6 +302,14 @@
         const submenus = product ? product.submenus : [];
         const currentSubmenu = submenus[currentProductIndex[category]] || submenus[0];
         const currentSubId = currentSubmenu ? currentSubmenu.id : null;
+
+        // Logika dinamis: Sembunyikan grup jika ID-nya ada di hiddenOptionalGroups varian ini
+        if (currentSubmenu && currentSubmenu.hiddenOptionalGroups && Array.isArray(currentSubmenu.hiddenOptionalGroups)) {
+            if (currentSubmenu.hiddenOptionalGroups.includes(group.id)) {
+                $container.innerHTML = '';
+                return;
+            }
+        }
 
         $container.innerHTML = `
             <div class="option-group">
