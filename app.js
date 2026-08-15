@@ -106,12 +106,12 @@
         $container.innerHTML = bestSellers.map(bs => `
             <div class="best-seller-card">
                 <div class="bs-image">
-                    <img src="${bs.image || 'assets/images/risoles.webp'}" alt="${window.t(bs.name)}">
-                    <span class="bs-badge">${window.t(bs.badge) || ''}</span>
+                    <img src="${bs.image || 'assets/images/risoles.webp'}" alt="${bs.name}">
+                    <span class="bs-badge">${bs.badge || ''}</span>
                 </div>
                 <div class="bs-content">
-                    <h3>${window.t(bs.name)}</h3>
-                    <p class="bs-desc">${window.t(bs.description) || ''}</p>
+                    <h3>${bs.name}</h3>
+                    <p class="bs-desc">${bs.description || ''}</p>
                     <div class="bs-rating">${bs.rating ? '⭐'.repeat(bs.rating) : ''}</div>
                 </div>
             </div>
@@ -165,26 +165,31 @@
                     <h3 class="mc-title mc-title-back" id="${cat}TitleDisplayBack">${defaultTitle}</h3>
                     <div class="mc-nav-left" onclick="switchProduct('${cat}', -1)" aria-label="Varian sebelumnya">◀</div>
                     <img src="${defaultImg}" alt="${defaultTitle}" class="mc-img" id="${cat}ImgDisplay">
-                    <h3 class="mc-title mc-title-front" id="${cat}TitleDisplayFront" aria-hidden="true">${window.t(defaultTitle)}</h3>
+                    <h3 class="mc-title mc-title-front" id="${cat}TitleDisplayFront" aria-hidden="true">${defaultTitle}</h3>
                     <div class="mc-nav-right" onclick="switchProduct('${cat}', 1)" aria-label="Varian selanjutnya">▶</div>
                     <div class="mc-price" id="${cat}PriceDisplay" data-base-price="${defaultPrice}">Rp ${defaultPrice.toLocaleString('id-ID')} / pcs</div>
                 </div>
                 <div class="mc-body">
-                    <p class="menu-note" id="${cat}NoteDisplay">${window.t(defaultNote)}</p>
-                    <div class="menu-content">
-                    <h3>${window.t(defaultTitle)}</h3>
-                    <div class="menu-price">Rp ${defaultPrice.toLocaleString('id-ID')}</div>
-                    <p class="menu-desc">${window.t(defaultNote)}</p>
-                    <div class="menu-action">
-                        <button class="btn btn-primary btn-full" onclick="openSubmenuModal('${cat}')">${window.t("Pesan Sekarang")}</button>
+                    <p class="menu-note" id="${cat}NoteDisplay">${defaultNote}</p>
+                    <div id="${cat}OptionalGroupsContainer"></div>
+                    <div class="row g-2 align-items-center mt-auto">
+                        <div class="col-12 col-md-5">
+                            <div class="mc-qty-box w-100">
+                                <button type="button" onclick="changeQty('${cat}', -1)" aria-label="Kurang">−</button>
+                                <span id="${cat}Qty">${minQty}</span>
+                                <button type="button" onclick="changeQty('${cat}', 1)" aria-label="Tambah">+</button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-7">
+                            <button class="mc-btn active w-100 text-uppercase fs-small" id="${cat}AddBtn"
+                                onclick="addToCartByCategory('${cat}')">Tambahkan ke Keranjang</button>
+                        </div>
                     </div>
-                </div>
-                <span id="${cat}Qty">${minQty}</span>
-                <button type="button" onclick="changeQty('${cat}', 1)" aria-label="Tambah">+</button>
                 </div>
             </div>`;
         }).join('');
 
+        // Render konten awal semua kartu
         products.forEach(p => renderMenuCard(p.id));
     }
 
@@ -199,16 +204,18 @@
         const currentSubmenu = submenus[idx] || submenus[0];
         if (!currentSubmenu) return;
 
+        // Title
         const titleBack = document.getElementById(`${category}TitleDisplayBack`);
         const titleFront = document.getElementById(`${category}TitleDisplayFront`);
         let titleText = currentSubmenu.name || product.name;
-        if (titleBack) titleBack.innerHTML = window.t(titleText);
-        if (titleFront) titleFront.innerHTML = window.t(titleText);
+        if (titleBack) titleBack.innerHTML = titleText;
+        if (titleFront) titleFront.innerHTML = titleText;
 
+        // Image
         const imgDisplay = document.getElementById(`${category}ImgDisplay`);
         if (imgDisplay) {
             imgDisplay.src = currentSubmenu.image || product.image || '';
-            imgDisplay.alt = window.t(currentSubmenu.name || product.name);
+            imgDisplay.alt = currentSubmenu.name || product.name;
             const scale = parseInt(currentSubmenu.imageScale, 10) || 100;
             const offsetX = parseInt(currentSubmenu.imageOffsetX, 10) || 0;
             const offsetY = parseInt(currentSubmenu.imageOffsetY, 10) || 0;
@@ -216,6 +223,7 @@
             imgDisplay.style.transformOrigin = 'center bottom';
         }
 
+        // Price
         const priceDisplay = document.getElementById(`${category}PriceDisplay`);
         if (priceDisplay) {
             const basePrice = parseInt(currentSubmenu.price, 10) || 0;
@@ -223,9 +231,11 @@
             priceDisplay.dataset.basePrice = basePrice;
         }
 
+        // Note
         const noteDisplay = document.getElementById(`${category}NoteDisplay`);
-        if (noteDisplay) noteDisplay.textContent = window.t(currentSubmenu.note || product.note || '');
+        if (noteDisplay) noteDisplay.textContent = currentSubmenu.note || product.note || '';
 
+        // Optional Groups (Mendukung jumlah dinamis)
         const optionalGroups = product.optionalGroups || [];
         const flavor = currentSubmenu.flavor_type || 'asin';
         const optContainer = document.getElementById(`${category}OptionalGroupsContainer`);
@@ -240,6 +250,7 @@
             });
         }
 
+        // Qty default berdasarkan sales_rules (dukung override per varian)
         const qtyEl = document.getElementById(`${category}Qty`);
         if (qtyEl) {
             const rules = getProductRules(category);
@@ -248,22 +259,23 @@
             if (currentVal < minOrder) qtyEl.textContent = minOrder;
         }
 
+        // Update Status Badge and Add to Cart button
         const status = currentSubmenu.status || 'available';
         const badgeContainer = document.getElementById(`${category}StatusBadgeContainer`);
         const addBtn = document.getElementById(`${category}AddBtn`);
         const menuCard = document.getElementById(`menu-${category}`);
 
         if (status === 'unavailable') {
-            if (badgeContainer) badgeContainer.innerHTML = `<div class="status-badge status-unavailable">${window.t("HABIS")}</div>`;
-            if (addBtn) { addBtn.textContent = window.t('Sedang Habis'); addBtn.classList.add('disabled'); addBtn.classList.remove('active'); addBtn.disabled = true; }
+            if (badgeContainer) badgeContainer.innerHTML = `<div class="status-badge status-unavailable">HABIS</div>`;
+            if (addBtn) { addBtn.textContent = 'Sedang Habis'; addBtn.classList.add('disabled'); addBtn.classList.remove('active'); addBtn.disabled = true; }
             if (menuCard) menuCard.classList.add('is-unavailable');
         } else if (status === 'coming_soon') {
-            if (badgeContainer) badgeContainer.innerHTML = `<div class="status-badge status-coming-soon">${window.t("COMING SOON")}</div>`;
-            if (addBtn) { addBtn.textContent = window.t('Segera Hadir'); addBtn.classList.add('disabled'); addBtn.classList.remove('active'); addBtn.disabled = true; }
+            if (badgeContainer) badgeContainer.innerHTML = `<div class="status-badge status-coming-soon">COMING SOON</div>`;
+            if (addBtn) { addBtn.textContent = 'Segera Hadir'; addBtn.classList.add('disabled'); addBtn.classList.remove('active'); addBtn.disabled = true; }
             if (menuCard) menuCard.classList.add('is-unavailable');
         } else {
             if (badgeContainer) badgeContainer.innerHTML = '';
-            if (addBtn) { addBtn.textContent = window.t('Tambahkan ke Keranjang'); addBtn.classList.remove('disabled'); addBtn.classList.add('active'); addBtn.disabled = false; }
+            if (addBtn) { addBtn.textContent = 'Tambahkan ke Keranjang'; addBtn.classList.remove('disabled'); addBtn.classList.add('active'); addBtn.disabled = false; }
             if (menuCard) menuCard.classList.remove('is-unavailable');
         }
     }
@@ -273,6 +285,7 @@
         const $container = document.getElementById(containerId);
         if (!$container) return;
 
+        // Logika cerdas: Jika flavor manis dan grup bernama "Pilihan Isi", sembunyikan!
         const groupLabelLower = (group?.label || group?.id || '').toLowerCase();
         if (flavor === 'manis' && (groupLabelLower.includes('isi') || groupLabelLower.includes('telur'))) {
             $container.innerHTML = '';
@@ -284,11 +297,13 @@
             return;
         }
 
+        // Ambil ID varian yang sedang aktif untuk logika override
         const product = config.products.find(p => p.id === category);
         const submenus = product ? product.submenus : [];
         const currentSubmenu = submenus[currentProductIndex[category]] || submenus[0];
         const currentSubId = currentSubmenu ? currentSubmenu.id : null;
 
+        // Logika dinamis: Sembunyikan grup jika ID-nya ada di hiddenOptionalGroups varian ini
         if (currentSubmenu && currentSubmenu.hiddenOptionalGroups && Array.isArray(currentSubmenu.hiddenOptionalGroups)) {
             if (currentSubmenu.hiddenOptionalGroups.includes(group.id)) {
                 $container.innerHTML = '';
@@ -299,7 +314,7 @@
         $container.innerHTML = `
             <div class="option-group">
                 <label style="font-weight:600;display:block;margin-bottom:0.5rem;">
-                    ${window.t(group.label || group.id)}
+                    ${group.label || group.id}
                 </label>
                 <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
                     ${(group.options || []).map((option, idx) => {
@@ -307,21 +322,20 @@
             if (currentSubId && option.overrides && option.overrides[currentSubId] !== undefined) {
                 adj = parseInt(option.overrides[currentSubId], 10);
             }
-            let adjText = adj ? ` (${adj > 0 ? '+' : ''}${adj})` : '';
 
             return `
-                        <label class="radio-label">
+                        <label style="display:flex;align-items:center;cursor:pointer;">
                             <input 
                                 type="radio" 
                                 name="${category}_optional_${groupIndex}" 
                                 value="${option.id}"
-                                data-adj="${adj}"
+                                data-adjustment="${adj}"
                                 ${idx === 0 ? 'checked' : ''}
                                 onchange="updateProductPrice('${category}')"
                             >
                             <span style="margin-left:0.4rem;font-size:0.9rem;">
-                                ${window.t(option.name)}
-                                ${adj ? `<span style="color:#666;font-size:0.8rem;">${adjText}</span>` : ''}
+                                ${option.name}
+                                ${adj ? `<span style="color:#666;font-size:0.8rem;"> (${adj > 0 ? '+' : ''}${adj})</span>` : ''}
                             </span>
                         </label>
                         `;
@@ -339,6 +353,7 @@
 
         const submenus = product.submenus || [];
         const currentSubmenu = submenus[currentProductIndex[category]] || submenus[0];
+        // parseInt wajib agar tidak terjadi string concatenation
         const basePrice = parseInt(currentSubmenu ? currentSubmenu.price : 0, 10) || 0;
 
         let totalAdjustment = 0;
@@ -346,7 +361,7 @@
         optionalGroups.forEach((group, idx) => {
             const selected = document.querySelector(`input[name="${category}_optional_${idx}"]:checked`);
             if (selected) {
-                totalAdjustment += parseInt(selected.dataset.adj || selected.dataset.adjustment, 10) || 0;
+                totalAdjustment += parseInt(selected.dataset.adjustment, 10) || 0;
             }
         });
 
@@ -357,15 +372,19 @@
             priceDisplay.dataset.finalPrice = finalPrice;
         }
 
+        // Auto adjust quantity if current is below new minimum order, or if it was stuck on a previous high minimum
         const rules = getProductRules(category);
         const qtyEl = document.getElementById(`${category}Qty`);
         if (qtyEl) {
             let currentQty = parseInt(qtyEl.textContent, 10) || 0;
             let lastAutoMin = parseInt(qtyEl.dataset.lastAutoMin, 10) || 0;
 
+            // Jika quantity saat ini kurang dari minOrder BARU, 
+            // ATAU jika quantity saat ini kebetulan persis sama dengan minOrder LAMA (berarti hasil auto-force) dan minOrder baru lebih kecil
             if (currentQty < rules.minOrder || (currentQty === lastAutoMin && rules.minOrder < currentQty)) {
                 qtyEl.textContent = rules.minOrder;
             }
+            // Simpan jejak minOrder saat ini
             qtyEl.dataset.lastAutoMin = rules.minOrder;
         }
     };
@@ -392,11 +411,13 @@
 
     // ============ QUANTITY ============
 
+    // Helper: ambil sales rules untuk produk tertentu
     function getProductRules(productId) {
         const product = Array.isArray(config.products)
             ? config.products.find(p => p.id === productId) : null;
         if (!product) return { minOrder: 1, defaultStep: 1 };
 
+        // Cek override dari varian (submenu) aktif
         const submenus = product.submenus || [];
         const idx = currentProductIndex[productId] || 0;
         const currentSubmenu = submenus[idx];
@@ -405,15 +426,18 @@
             let min = 1;
             let step = 1;
 
+            // 1. Ambil dari aturan spesifik varian (jika ada)
             if (currentSubmenu.minOrder !== undefined && currentSubmenu.minOrder !== null) {
                 min = parseInt(currentSubmenu.minOrder, 10) || 1;
                 step = min;
             } else if (product.sales_rules) {
+                // 2. Jika tidak ada override varian, gunakan aturan produk utama
                 const r = typeof product.sales_rules === 'string' ? JSON.parse(product.sales_rules) : product.sales_rules;
                 min = parseInt(r.minOrder, 10) || 1;
                 step = parseInt(r.defaultStep, 10) || 1;
             }
 
+            // 3. Cek override berdasarkan opsi yang dipilih (prioritas tertinggi)
             if (currentSubmenu.optionMinOrder) {
                 const optionalGroups = product.optionalGroups || [];
                 optionalGroups.forEach((group, idx) => {
@@ -428,6 +452,7 @@
             return { minOrder: min, defaultStep: step };
         }
 
+        // Jika tidak ada override varian, gunakan aturan produk utama
         if (!product.sales_rules) return { minOrder: 1, defaultStep: 1 };
         const r = typeof product.sales_rules === 'string'
             ? JSON.parse(product.sales_rules) : product.sales_rules;
@@ -437,6 +462,10 @@
         };
     }
 
+    // Kompatibilitas mundur — fungsi lama tetap berjalan
+    function getRisolesRules() { return getProductRules('risoles'); }
+
+    // Tombol qty universal untuk semua produk
     window.changeQty = function (category, direction) {
         const qtyEl = document.getElementById(`${category}Qty`);
         if (!qtyEl) return;
@@ -448,33 +477,41 @@
         qtyEl.textContent = Math.max(min, currentQty + (direction * step));
     };
 
+    // Kompatibilitas mundur untuk fungsi qty lama
+    window.changeRisolesQty = function (dir) { window.changeQty('risoles', dir); };
+    window.changePuddingQty = function (dir) { window.changeQty('pudding', dir); };
+
     // ============ ADD TO CART ============
     window.addToCartByCategory = function (cat) { addToCart(cat); };
+    window.addRisolesToCart = function () { addToCart('risoles'); };
+    window.addPuddingToCart = function () { addToCart('pudding'); };
 
     function addToCart(category) {
         if (!Array.isArray(config.products)) {
-            showToast(window.t('❌ Data produk belum siap'));
+            showToast('❌ Data produk belum siap');
             return;
         }
         const product = config.products.find(p => p.id === category);
         if (!product) {
-            showToast(window.t('❌ Produk tidak ditemukan'));
+            showToast('❌ Produk tidak ditemukan');
             return;
         }
 
+        // Baca qty dari span
         const qtyEl = document.getElementById(`${category}Qty`);
         const qty = qtyEl ? (parseInt(qtyEl.textContent, 10) || 1) : 1;
 
+        // Validasi minimum order
         const rules = getProductRules(category);
         if (qty < rules.minOrder) {
-            showToast(`${window.t("⚠️ Minimal pembelian adalah")} ${rules.minOrder} pcs.`);
+            showToast(`⚠️ Minimal pembelian adalah ${rules.minOrder} pcs.`);
             if (qtyEl) qtyEl.textContent = rules.minOrder;
             return;
         }
         const submenus = product.submenus || [];
         const currentSubmenu = submenus[currentProductIndex[category]] || submenus[0];
         if (!currentSubmenu) {
-            showToast(window.t('❌ Varian tidak ditemukan'));
+            showToast('❌ Varian tidak ditemukan');
             return;
         }
 
@@ -487,7 +524,7 @@
                     label: group.label,
                     selected: selected.value,
                     selectedName: selected.labels[0].textContent.trim().split('(')[0].trim(),
-                    adjustment: parseInt(selected.dataset.adj || selected.dataset.adjustment) || 0
+                    adjustment: parseInt(selected.dataset.adjustment) || 0
                 };
             }
         });
@@ -513,7 +550,7 @@
         cart.push(cartItem);
         saveCart();
         updateCartUI();
-        showToast(`✅ ${window.t(currentSubmenu.name)} ${window.t("ditambahkan ke keranjang!")}`);
+        showToast(`✅ ${currentSubmenu.name} ditambahkan ke keranjang!`);
     }
 
     // ============ CART MANAGEMENT ============
@@ -538,7 +575,7 @@
         cart = cart.filter(item => item.id !== itemId);
         saveCart();
         updateCartUI();
-        showToast(window.t('🗑️ Item dihapus dari keranjang'));
+        showToast('🗑️ Item dihapus dari keranjang');
     };
 
     window.updateItemQty = function (itemId, newQty) {
@@ -565,8 +602,8 @@
             $container.innerHTML = `
                 <div class="cart-empty">
                     <div class="empty-icon">🛒</div>
-                    <p>${window.t("Keranjang masih kosong.")}</p>
-                    <p style="font-size:0.85rem;">${window.t("Yuk, pilih menu favoritmu!")}</p>
+                    <p>Keranjang masih kosong.</p>
+                    <p style="font-size:0.85rem;">Yuk, pilih menu favoritmu!</p>
                 </div>
             `;
             return;
@@ -582,18 +619,18 @@
             return `
             <div class="cart-item">
                 <div class="ci-info">
-                    <h4>${window.t(item.submenuName)}</h4>
-                    <p class="ci-meta">${window.t(item.parentName)} • Rp ${item.finalPrice.toLocaleString('id-ID')}/${window.t("pcs")}</p>
+                    <h4>${item.submenuName}</h4>
+                    <p class="ci-meta">${item.parentName} • Rp ${item.finalPrice.toLocaleString('id-ID')}/pcs</p>
                     ${Object.keys(item.options).length > 0 ? `
                         <p class="ci-options" style="font-size:0.8rem;color:#666;margin-top:0.3rem;">
-                            ${Object.values(item.options).map(opt => `${window.t(opt.selectedName)}`).join(', ')}
+                            ${Object.values(item.options).map(opt => `${opt.selectedName}`).join(', ')}
                         </p>
                     ` : ''}
                 </div>
                 <div class="ci-controls">
                     <div class="qty-selector">
                         <button onclick="updateItemQty('${item.id}', ${prevQty})" ${item.qty <= minQty ? 'disabled style="opacity:0.4;cursor:not-allowed;"' : ''}>−</button>
-                        <span>${item.qty} ${window.t("pcs")}</span>
+                        <span>${item.qty} pcs</span>
                         <button onclick="updateItemQty('${item.id}', ${nextQty})">+</button>
                     </div>
                     <div class="ci-total">
@@ -621,7 +658,7 @@
         if ($ccTotal) $ccTotal.textContent = `Rp ${total.toLocaleString('id-ID')}`;
         const $ccItems = document.getElementById('ccItems');
         if ($ccItems) {
-            $ccItems.textContent = cart.length === 0 ? window.t('Keranjang kosong') : `${cart.length} ${window.t("item")}`;
+            $ccItems.textContent = cart.length === 0 ? 'Keranjang kosong' : `${cart.length} item${cart.length > 1 ? 's' : ''}`;
         }
         const $btnWA = document.getElementById('btnWhatsApp');
         const $ccQuickOrder = document.getElementById('ccQuickOrder');
@@ -653,23 +690,23 @@
     // ============ WHATSAPP ORDER ============
     window.orderViaWhatsApp = function () {
         if (cart.length === 0) {
-            showToast(window.t('❌ Keranjang masih kosong'));
+            showToast('❌ Keranjang masih kosong');
             return;
         }
 
         const phone = config.businessPhone || '6281234567890';
         const businessName = config.businessName || 'Dapur Rumahan';
 
-        let message = `*${window.t("Pesanan dari Website")} ${businessName}*\n\n`;
+        let message = `*Pesanan dari Website ${businessName}*\n\n`;
         let total = 0;
 
         cart.forEach((item, idx) => {
             const itemTotal = item.finalPrice * item.qty;
             total += itemTotal;
-            message += `${idx + 1}. ${window.t(item.submenuName)} (${item.qty} ${window.t("pcs")})\n`;
+            message += `${idx + 1}. ${item.submenuName} (${item.qty} pcs)\n`;
             message += `   Rp ${item.finalPrice.toLocaleString('id-ID')} × ${item.qty} = Rp ${itemTotal.toLocaleString('id-ID')}\n`;
             if (Object.keys(item.options).length > 0) {
-                message += `   ${window.t("Opsi")}: ${Object.values(item.options).map(opt => window.t(opt.selectedName)).join(', ')}\n`;
+                message += `   Opsi: ${Object.values(item.options).map(opt => opt.selectedName).join(', ')}\n`;
             }
             message += '\n';
         });
