@@ -51,8 +51,8 @@ window.CONFIG = {
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "0",
-                    "created_at": "2026-08-15 10:09:02",
-                    "updated_at": "2026-08-15 10:09:02",
+                    "created_at": "2026-08-15 10:15:29",
+                    "updated_at": "2026-08-15 10:15:29",
                     "imageScale": 185,
                     "imageOffsetX": 0,
                     "imageOffsetY": 45,
@@ -72,8 +72,8 @@ window.CONFIG = {
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "1",
-                    "created_at": "2026-08-15 10:09:02",
-                    "updated_at": "2026-08-15 10:09:02",
+                    "created_at": "2026-08-15 10:15:29",
+                    "updated_at": "2026-08-15 10:15:29",
                     "imageScale": 180,
                     "imageOffsetX": 0,
                     "imageOffsetY": 50,
@@ -92,8 +92,8 @@ window.CONFIG = {
                     "product_id": "pudding",
                     "label": "Serving",
                     "sort_order": "0",
-                    "created_at": "2026-08-15 10:09:02",
-                    "updated_at": "2026-08-15 10:09:02",
+                    "created_at": "2026-08-15 10:15:29",
+                    "updated_at": "2026-08-15 10:15:29",
                     "options": [
                         {
                             "id": "serv-opt1",
@@ -103,8 +103,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-15 10:09:02",
-                            "updated_at": "2026-08-15 10:09:02",
+                            "created_at": "2026-08-15 10:15:29",
+                            "updated_at": "2026-08-15 10:15:29",
                             "adj": 0
                         },
                         {
@@ -115,8 +115,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-15 10:09:02",
-                            "updated_at": "2026-08-15 10:09:02",
+                            "created_at": "2026-08-15 10:15:29",
+                            "updated_at": "2026-08-15 10:15:29",
                             "adj": 0
                         }
                     ]
@@ -126,8 +126,8 @@ window.CONFIG = {
                     "product_id": "pudding",
                     "label": "Topping",
                     "sort_order": "1",
-                    "created_at": "2026-08-15 10:09:02",
-                    "updated_at": "2026-08-15 10:09:02",
+                    "created_at": "2026-08-15 10:15:29",
+                    "updated_at": "2026-08-15 10:15:29",
                     "options": [
                         {
                             "id": "toppings-opt1",
@@ -137,8 +137,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-15 10:09:02",
-                            "updated_at": "2026-08-15 10:09:02",
+                            "created_at": "2026-08-15 10:15:29",
+                            "updated_at": "2026-08-15 10:15:29",
                             "adj": 0
                         },
                         {
@@ -149,8 +149,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-15 10:09:02",
-                            "updated_at": "2026-08-15 10:09:02",
+                            "created_at": "2026-08-15 10:15:29",
+                            "updated_at": "2026-08-15 10:15:29",
                             "adj": 0
                         }
                     ]
@@ -160,8 +160,8 @@ window.CONFIG = {
                     "product_id": "pudding",
                     "label": "Ukuran",
                     "sort_order": "2",
-                    "created_at": "2026-08-15 10:09:02",
-                    "updated_at": "2026-08-15 10:09:02",
+                    "created_at": "2026-08-15 10:15:29",
+                    "updated_at": "2026-08-15 10:15:29",
                     "options": [
                         {
                             "id": "ukuran-opt1",
@@ -171,8 +171,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-15 10:09:02",
-                            "updated_at": "2026-08-15 10:09:02",
+                            "created_at": "2026-08-15 10:15:29",
+                            "updated_at": "2026-08-15 10:15:29",
                             "adj": 0
                         },
                         {
@@ -181,10 +181,13 @@ window.CONFIG = {
                             "product_id": "pudding",
                             "name": "Sedang (500ml)",
                             "adjustment": 0,
-                            "overrides": [],
+                            "overrides": {
+                                "silverqueen": -80000,
+                                "regal": -60000
+                            },
                             "sort_order": "1",
-                            "created_at": "2026-08-15 10:09:02",
-                            "updated_at": "2026-08-15 10:09:02",
+                            "created_at": "2026-08-15 10:15:29",
+                            "updated_at": "2026-08-15 10:15:29",
                             "adj": 0
                         },
                         {
@@ -193,10 +196,13 @@ window.CONFIG = {
                             "product_id": "pudding",
                             "name": "Kecil (100ml)",
                             "adjustment": 0,
-                            "overrides": [],
+                            "overrides": {
+                                "silverqueen": -116000,
+                                "regal": -88000
+                            },
                             "sort_order": "2",
-                            "created_at": "2026-08-15 10:09:02",
-                            "updated_at": "2026-08-15 10:09:02",
+                            "created_at": "2026-08-15 10:15:29",
+                            "updated_at": "2026-08-15 10:15:29",
                             "adj": 0
                         }
                     ]
