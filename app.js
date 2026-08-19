@@ -744,16 +744,19 @@
     // ============ RENDER TESTIMONI ============
     function renderTestimonials() {
         const testimonials = config.testimonials || [];
-        const container = document.querySelector('.testimoni-grid');
+        const container = document.getElementById('testimoniTrack');
         if (!container || testimonials.length === 0) return;
 
-        container.innerHTML = testimonials.map(t => `
+        // Duplikat array agar animasi infinite scroll tidak terputus (seamless)
+        const displayList = [...testimonials, ...testimonials];
+
+        container.innerHTML = displayList.map(t => `
             <div class="testimoni-card">
                 <div class="quote-icon">❝</div>
-                <p>"${t.quote}"</p>
+                <p>"${t.quote || t.text}"</p>
                 <div class="t-stars">${'⭐'.repeat(t.rating || 5)}</div>
-                <div class="t-author">${t.author}</div>
-                <div class="t-role">${t.role || ''}${t.location ? ' • ' + t.location : ''}</div>
+                <div class="t-author">${t.author || t.name}</div>
+                <div class="t-role">${t.role || '@' + t.username}</div>
             </div>
         `).join('');
     }
@@ -832,9 +835,9 @@
         toast.innerHTML = `
             <div class="testimonial-toast-icon">💬</div>
             <div class="testimonial-toast-content">
-                <h4>${randomT.author}</h4>
+                <h4>${randomT.author || randomT.name}</h4>
                 <div class="t-stars">${'⭐'.repeat(randomT.rating || 5)}</div>
-                <p>"${randomT.quote}"</p>
+                <p>"${randomT.quote || randomT.text}"</p>
             </div>
         `;
 
