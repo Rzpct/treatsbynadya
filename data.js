@@ -308,7 +308,7 @@ window.CONFIG = {
                     "total_sales": "80",
                     "imageScale": 300,
                     "imageOffsetX": 0,
-                    "imageOffsetY": 120,
+                    "imageOffsetY": 90,
                     "minOrder": 5
                 },
                 {
@@ -327,7 +327,7 @@ window.CONFIG = {
                     "total_sales": "0",
                     "imageScale": 300,
                     "imageOffsetX": 0,
-                    "imageOffsetY": 120,
+                    "imageOffsetY": 90,
                     "minOrder": 5,
                     "optionMinOrder": []
                 }
