@@ -306,9 +306,9 @@ window.CONFIG = {
                     "created_at": "2026-08-19 20:47:43",
                     "updated_at": "2026-08-19 20:47:43",
                     "total_sales": "80",
-                    "imageScale": 400,
+                    "imageScale": 300,
                     "imageOffsetX": 0,
-                    "imageOffsetY": 80,
+                    "imageOffsetY": 120,
                     "minOrder": 5
                 },
                 {
@@ -325,9 +325,9 @@ window.CONFIG = {
                     "created_at": "2026-08-19 20:47:43",
                     "updated_at": "2026-08-19 20:47:43",
                     "total_sales": "0",
-                    "imageScale": 400,
+                    "imageScale": 300,
                     "imageOffsetX": 0,
-                    "imageOffsetY": 90,
+                    "imageOffsetY": 120,
                     "minOrder": 5,
                     "optionMinOrder": []
                 }
