@@ -160,13 +160,13 @@
 
             return `
             <div class="best-seller-card">
-                <div class="bs-image">
-                    <img src="${img}" alt="${window.t(title)}">
-                    <span class="bs-badge">Rp ${price.toLocaleString('id-ID')}</span>
+                <div class="bs-image" style="aspect-ratio: 1/1; overflow: hidden;">
+                    <img src="${img}" alt="${window.t(title)}" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="bs-content">
-                    <h3>${window.t(title)}</h3>
-                    <p class="bs-desc">${window.t(note)}</p>
+                    <span class="bs-price-text" style="color: var(--primary); font-weight: 700; display: block; margin-bottom: 5px;">Rp ${price.toLocaleString('id-ID')}</span>
+                    <h3 style="margin-bottom: 5px;">${window.t(title)}</h3>
+                    <p class="bs-desc" onclick="this.classList.toggle('expanded')" style="cursor: pointer;" title="Klik untuk selengkapnya">${window.t(note)}</p>
                 </div>
             </div>
             `;

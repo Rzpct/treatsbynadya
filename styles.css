@@ -2535,3 +2535,17 @@ body {
         max-width: 280px;
     }
 }
+
+/* ==================== KATALOG CARD UPDATES ==================== */
+.bs-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Hanya tampil 2 baris awal */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin: 0;
+}
+
+.bs-desc.expanded {
+    -webkit-line-clamp: unset; /* Tampil full jika di-klik */
+}
