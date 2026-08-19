@@ -27,13 +27,14 @@
 
         loadCart();
         renderBusinessInfo();
-        renderBestSellers();
+        renderKatalogCards('sales'); // Replaces renderBestSellers
         renderMenuCards();
         renderAbout();
         renderTestimonials();
         setupNavigation();
         setupCartPanel();
         updateCartUI();
+        startRandomTestimonials();
 
         console.log('✅ Frontend siap!');
     }
@@ -44,7 +45,7 @@
 
         if (config.businessName) {
             document.querySelectorAll('.nav-logo').forEach(el => {
-                const logoSrc = config.aboutImage || 'assets/images/profile.webp';
+                const logoSrc = config.aboutImage || 'assets/images/profile.jpg';
                 el.innerHTML = `<img src="${logoSrc}" alt="Logo" class="logo-icon-img"> ${config.businessName}`;
             });
             const footerName = document.querySelector('.footer strong');
@@ -98,31 +99,79 @@
         }
     }
 
-    // ============ RENDER BEST SELLERS ============
-    function renderBestSellers() {
-        const $container = document.getElementById('bestSellerGrid');
+    // ============ RENDER KATALOG (MENGGANTIKAN BEST SELLER) ============
+    window.renderKatalogCards = function(criteria) {
+        const $container = document.getElementById('katalogGrid');
         if (!$container) return;
 
-        const bestSellers = config.bestSellers || [];
-        if (bestSellers.length === 0) {
-            $container.innerHTML = '<p style="text-align:center;color:#999;">Tidak ada best seller</p>';
+        if (!config || !config.products || config.products.length === 0) {
+            $container.innerHTML = '<p style="text-align:center;color:#999;">Tidak ada produk</p>';
             return;
         }
 
-        $container.innerHTML = bestSellers.map(bs => `
+        // Update active button styling
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        if (criteria === 'sales' && document.getElementById('sortSalesBtn')) document.getElementById('sortSalesBtn').classList.add('active');
+        if (criteria === 'priceAsc' && document.getElementById('sortPriceAscBtn')) document.getElementById('sortPriceAscBtn').classList.add('active');
+        if (criteria === 'priceDesc' && document.getElementById('sortPriceDescBtn')) document.getElementById('sortPriceDescBtn').classList.add('active');
+
+        // Extract all submenus into a single array
+        let allSubmenus = [];
+        config.products.forEach(p => {
+            if (p.submenus && p.submenus.length > 0) {
+                p.submenus.forEach(sub => {
+                    allSubmenus.push({
+                        ...sub,
+                        parent_name: p.name // Keep track of parent product name if needed
+                    });
+                });
+            }
+        });
+
+        if (allSubmenus.length === 0) {
+            $container.innerHTML = '<p style="text-align:center;color:#999;">Tidak ada produk</p>';
+            return;
+        }
+
+        // Sort the flattened submenus
+        allSubmenus.sort((a, b) => {
+            const priceA = parseInt(a.price, 10) || 0;
+            const priceB = parseInt(b.price, 10) || 0;
+            const salesA = parseInt(a.total_sales, 10) || 0;
+            const salesB = parseInt(b.total_sales, 10) || 0;
+
+            if (criteria === 'sales') {
+                return salesB - salesA;
+            } else if (criteria === 'priceAsc') {
+                return priceA - priceB;
+            } else if (criteria === 'priceDesc') {
+                return priceB - priceA;
+            }
+            return 0;
+        });
+
+        // Tampilkan produk menggunakan desain kartu Best Seller lama yang tidak punya interaksi (Add to Cart)
+        // karena itu ada di bagian Order (Menu)
+        $container.innerHTML = allSubmenus.map(sub => {
+            const img = sub.image || 'assets/images/risoles.webp';
+            const title = sub.name || '';
+            const price = parseInt(sub.price, 10) || 0;
+            const note = sub.note || '';
+
+            return `
             <div class="best-seller-card">
                 <div class="bs-image">
-                    <img src="${bs.image || 'assets/images/risoles.webp'}" alt="${window.t(bs.name)}">
-                    <span class="bs-badge">${window.t(bs.badge) || ''}</span>
+                    <img src="${img}" alt="${window.t(title)}">
+                    <span class="bs-badge">Rp ${price.toLocaleString('id-ID')}</span>
                 </div>
                 <div class="bs-content">
-                    <h3>${window.t(bs.name)}</h3>
-                    <p class="bs-desc">${window.t(bs.description) || ''}</p>
-                    <div class="bs-rating">${bs.rating ? '⭐'.repeat(bs.rating) : ''}</div>
+                    <h3>${window.t(title)}</h3>
+                    <p class="bs-desc">${window.t(note)}</p>
                 </div>
             </div>
-        `).join('');
-    }
+            `;
+        }).join('');
+    };
 
     // ============ RENDER MENU (DINAMIS) ============
     function renderMenuCards() {
@@ -739,6 +788,76 @@
                 }
             });
         });
+    }
+
+    // ============ RANDOM TESTIMONIAL TOASTS ============
+    function startRandomTestimonials() {
+        if (!config.testimonials || config.testimonials.length === 0) return;
+
+        // Buat container jika belum ada
+        let container = document.querySelector('.testimonial-toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'testimonial-toast-container';
+            document.body.appendChild(container);
+        }
+
+        // Ambil list testimoni asli
+        const testiList = [...config.testimonials];
+        
+        // Interval acak antara 15 detik sampai 45 detik
+        function scheduleNextToast() {
+            const delay = Math.floor(Math.random() * (45000 - 15000 + 1)) + 15000;
+            setTimeout(() => {
+                showRandomTestimonial(container, testiList);
+                scheduleNextToast();
+            }, delay);
+        }
+
+        // Mulai toast pertama setelah 8 detik
+        setTimeout(() => {
+            showRandomTestimonial(container, testiList);
+            scheduleNextToast();
+        }, 8000);
+    }
+
+    function showRandomTestimonial(container, testiList) {
+        if (testiList.length === 0) return;
+        
+        // Pilih satu acak
+        const randomT = testiList[Math.floor(Math.random() * testiList.length)];
+        
+        const toast = document.createElement('div');
+        toast.className = 'testimonial-toast';
+        toast.innerHTML = `
+            <div class="testimonial-toast-icon">💬</div>
+            <div class="testimonial-toast-content">
+                <h4>${randomT.author}</h4>
+                <div class="t-stars">${'⭐'.repeat(randomT.rating || 5)}</div>
+                <p>"${randomT.quote}"</p>
+            </div>
+        `;
+
+        // Tutup jika di-klik
+        toast.addEventListener('click', () => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 500);
+        });
+
+        container.appendChild(toast);
+
+        // Animasikan masuk
+        requestAnimationFrame(() => {
+            setTimeout(() => toast.classList.add('show'), 50);
+        });
+
+        // Hilang otomatis setelah 6 detik
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                if (toast.parentNode) toast.remove();
+            }, 600);
+        }, 6000);
     }
 
     // ============ TOAST ============
