@@ -247,8 +247,8 @@ window.CONFIG = {
                     "flavor_type": "asin",
                     "status": "available",
                     "sort_order": "0",
-                    "created_at": "2026-08-19 21:16:52",
-                    "updated_at": "2026-08-19 21:16:52",
+                    "created_at": "2026-08-19 21:32:27",
+                    "updated_at": "2026-08-19 21:32:27",
                     "total_sales": "522",
                     "imageScale": 190,
                     "imageOffsetX": 0,
@@ -265,8 +265,8 @@ window.CONFIG = {
                     "flavor_type": "asin",
                     "status": "coming_soon",
                     "sort_order": "1",
-                    "created_at": "2026-08-19 21:16:52",
-                    "updated_at": "2026-08-19 21:16:52",
+                    "created_at": "2026-08-19 21:32:27",
+                    "updated_at": "2026-08-19 21:32:27",
                     "total_sales": "0",
                     "imageScale": 190,
                     "imageOffsetX": 0,
@@ -275,7 +275,7 @@ window.CONFIG = {
                 {
                     "id": "smoke-beef",
                     "product_id": "risoles",
-                    "name": "Risoles Beef Bolognese",
+                    "name": "Risoles Smoke Beef",
                     "description": "",
                     "image": "assets/images/smokebeef-nobg.webp",
                     "price": "6000",
@@ -283,8 +283,8 @@ window.CONFIG = {
                     "flavor_type": "asin",
                     "status": "available",
                     "sort_order": "2",
-                    "created_at": "2026-08-19 21:16:52",
-                    "updated_at": "2026-08-19 21:16:52",
+                    "created_at": "2026-08-19 21:32:27",
+                    "updated_at": "2026-08-19 21:32:27",
                     "total_sales": "0",
                     "imageScale": 190,
                     "imageOffsetX": 0,
@@ -303,12 +303,12 @@ window.CONFIG = {
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "3",
-                    "created_at": "2026-08-19 21:16:52",
-                    "updated_at": "2026-08-19 21:16:52",
+                    "created_at": "2026-08-19 21:32:27",
+                    "updated_at": "2026-08-19 21:32:27",
                     "total_sales": "80",
                     "imageScale": 300,
                     "imageOffsetX": 0,
-                    "imageOffsetY": 80,
+                    "imageOffsetY": 90,
                     "minOrder": 5
                 },
                 {
@@ -322,13 +322,33 @@ window.CONFIG = {
                     "flavor_type": "manis",
                     "status": "available",
                     "sort_order": "4",
-                    "created_at": "2026-08-19 21:16:52",
-                    "updated_at": "2026-08-19 21:16:52",
+                    "created_at": "2026-08-19 21:32:27",
+                    "updated_at": "2026-08-19 21:32:27",
                     "total_sales": "0",
                     "imageScale": 300,
                     "imageOffsetX": 0,
                     "imageOffsetY": 90,
                     "minOrder": 5,
+                    "optionMinOrder": []
+                },
+                {
+                    "id": "risoles-var3",
+                    "product_id": "risoles",
+                    "name": "Risoles Beef Bolognese",
+                    "description": "",
+                    "image": "assets/images/beef bolognese.webp",
+                    "price": "6000",
+                    "note": "Kebayang gak garingnya risoles berpadu dengan gurihnya daging saus bolognese dan keju",
+                    "flavor_type": "asin",
+                    "status": "available",
+                    "sort_order": "5",
+                    "created_at": "2026-08-19 21:32:27",
+                    "updated_at": "2026-08-19 21:32:27",
+                    "total_sales": "0",
+                    "imageScale": 170,
+                    "imageOffsetX": 0,
+                    "imageOffsetY": 45,
+                    "hiddenOptionalGroups": [],
                     "optionMinOrder": []
                 }
             ],
@@ -338,8 +358,8 @@ window.CONFIG = {
                     "product_id": "risoles",
                     "label": "Penyajian",
                     "sort_order": "0",
-                    "created_at": "2026-08-19 21:16:52",
-                    "updated_at": "2026-08-19 21:16:52",
+                    "created_at": "2026-08-19 21:32:27",
+                    "updated_at": "2026-08-19 21:32:27",
                     "options": [
                         {
                             "id": "goreng",
@@ -349,8 +369,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-19 21:16:52",
-                            "updated_at": "2026-08-19 21:16:52",
+                            "created_at": "2026-08-19 21:32:27",
+                            "updated_at": "2026-08-19 21:32:27",
                             "adj": 0
                         },
                         {
@@ -361,8 +381,8 @@ window.CONFIG = {
                             "adjustment": -1000,
                             "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-19 21:16:52",
-                            "updated_at": "2026-08-19 21:16:52",
+                            "created_at": "2026-08-19 21:32:27",
+                            "updated_at": "2026-08-19 21:32:27",
                             "adj": -1000
                         }
                     ]
@@ -372,8 +392,8 @@ window.CONFIG = {
                     "product_id": "risoles",
                     "label": "Pilihan Isi",
                     "sort_order": "1",
-                    "created_at": "2026-08-19 21:16:52",
-                    "updated_at": "2026-08-19 21:16:52",
+                    "created_at": "2026-08-19 21:32:27",
+                    "updated_at": "2026-08-19 21:32:27",
                     "options": [
                         {
                             "id": "normal",
@@ -383,8 +403,8 @@ window.CONFIG = {
                             "adjustment": 0,
                             "overrides": [],
                             "sort_order": "0",
-                            "created_at": "2026-08-19 21:16:52",
-                            "updated_at": "2026-08-19 21:16:52",
+                            "created_at": "2026-08-19 21:32:27",
+                            "updated_at": "2026-08-19 21:32:27",
                             "adj": 0
                         },
                         {
@@ -395,8 +415,8 @@ window.CONFIG = {
                             "adjustment": -500,
                             "overrides": [],
                             "sort_order": "1",
-                            "created_at": "2026-08-19 21:16:52",
-                            "updated_at": "2026-08-19 21:16:52",
+                            "created_at": "2026-08-19 21:32:27",
+                            "updated_at": "2026-08-19 21:32:27",
                             "adj": -500
                         }
                     ]
